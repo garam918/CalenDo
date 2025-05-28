@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="todo"
+            type="com.garam.todolist.data.Todo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:buttonTintMode="src_atop"
+            android:drawableTintMode="src_atop"
+            android:drawableTint="@color/color_gray0"
+            android:buttonTint="@color/color_gray0"
+            android:button="@drawable/goal_todo_status_none_icon"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/todo_item_check_box"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/todo_item_title_constraint"
+            app:layout_constraintTop_toTopOf="@id/todo_item_check_box"
+            app:layout_constraintBottom_toBottomOf="@id/todo_item_check_box"
+            app:layout_constraintStart_toEndOf="@id/todo_item_check_box"
+            app:layout_constraintEnd_toStartOf="@id/todo_item_more_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:imeOptions="actionDone"
+                android:text="@{todo.title}"
+                android:background="@null"
+                android:textAppearance="@style/todo_in_goal_title_text_style"
+                android:textColor="@color/color_gray0"
+                app:layout_constraintEnd_toStartOf="@id/todo_item_img_linear"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/todo_item_title_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:id="@+id/todo_item_img_linear"
+                android:gravity="center"
+                android:layout_marginStart="2dp"
+                app:layout_constraintStart_toEndOf="@id/todo_item_title_edit_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    todo_item_icon_visibility="@{todo}"
+                    android:visibility="gone"
+                    android:src="@drawable/todo_item_priority_icon"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:id="@+id/todo_item_priority_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    todo_item_icon_visibility="@{todo}"
+                    android:visibility="gone"
+                    android:src="@drawable/todo_item_repeat_icon"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:id="@+id/todo_item_repeat_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <ImageView
+                    todo_item_icon_visibility="@{todo}"
+                    android:visibility="gone"
+                    android:src="@drawable/todo_item_memo_icon"
+                    android:layout_marginStart="2dp"
+                    android:layout_marginEnd="2dp"
+                    android:id="@+id/todo_item_memo_img"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageButton
+            android:padding="10dp"
+            android:src="@drawable/goal_todo_item_more_icon"
+            app:layout_constraintTop_toTopOf="@id/todo_item_check_box"
+            app:layout_constraintBottom_toBottomOf="@id/todo_item_check_box"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@null"
+            android:id="@+id/todo_item_more_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/week_calendar_day_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:gravity="center"
+        android:paddingStart="11.5dp"
+        android:paddingEnd="11.5dp"
+        android:text="1"
+        android:textAppearance="@style/calendar_default_text_style"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calendar_item_calendo_mode_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2.5dp"
+        android:layout_marginEnd="2.5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/calendar_item_divide_view"
+        app:layout_constraintTop_toBottomOf="@id/week_calendar_day_text">
+
+        <TextView
+            android:id="@+id/calendar_calendo_todo_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/calendar_item_count_text_todo_bg"
+            android:gravity="center"
+            android:text="할일 0"
+            android:textAppearance="@style/calendar_item_calendo_mode_count_text_style"
+            app:layout_constraintBottom_toTopOf="@id/calendar_calendo_plan_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/calendar_calendo_plan_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            app:layout_goneMarginTop="0dp"
+            android:background="@drawable/calendar_item_count_text_plan_bg"
+            android:gravity="center"
+            android:text="일정 0"
+            android:textAppearance="@style/calendar_item_calendo_mode_count_text_style"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/calendar_calendo_todo_text" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calendar_item_todo_plan_mode_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2.5dp"
+        android:layout_marginEnd="2.5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/calendar_item_divide_view"
+        app:layout_constraintTop_toBottomOf="@id/week_calendar_day_text">
+
+        <LinearLayout
+            android:gravity="center"
+            android:id="@+id/todo_plan_mode_first_linear"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/todo_plan_mode_first_text"
+                android:background="@drawable/calendar_todo_plan_text_bg"
+                android:text="0"
+                android:textSize="9sp"
+                android:drawablePadding="1dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:layout_marginEnd="0.5dp"
+                android:layout_marginBottom="0.5dp"
+                android:gravity="center"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/todo_plan_mode_third_text"
+                android:layout_width="21dp"
+                android:layout_height="16dp"/>
+
+            <TextView
+                android:text="0"
+                android:textSize="9sp"
+                android:drawablePadding="1dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:layout_marginStart="0.5dp"
+                android:background="@drawable/calendar_todo_plan_text_bg"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="@id/todo_plan_mode_first_text"
+                app:layout_constraintBottom_toBottomOf="@id/todo_plan_mode_first_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:id="@+id/todo_plan_mode_second_text"
+                android:layout_width="21dp"
+                android:layout_height="16dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:id="@+id/todo_plan_mode_second_linear"
+            app:layout_constraintTop_toBottomOf="@id/todo_plan_mode_first_linear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="0"
+                android:textSize="9sp"
+                android:drawablePadding="1dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:background="@drawable/calendar_todo_plan_text_bg"
+                android:gravity="center"
+                android:layout_marginTop="0.5dp"
+                android:layout_marginEnd="0.5dp"
+                app:layout_constraintTop_toBottomOf="@id/todo_plan_mode_first_text"
+                app:layout_constraintStart_toStartOf="@id/todo_plan_mode_first_text"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/todo_plan_mode_third_text"
+                android:layout_width="21dp"
+                android:layout_height="16dp"/>
+
+            <TextView
+                android:text="0"
+                android:textSize="9sp"
+                android:drawablePadding="1dp"
+                android:paddingStart="2dp"
+                android:paddingEnd="2dp"
+                android:layout_marginStart="0.5dp"
+                android:background="@drawable/calendar_todo_plan_text_bg"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="@id/todo_plan_mode_third_text"
+                app:layout_constraintEnd_toEndOf="@id/todo_plan_mode_second_text"
+                app:layout_constraintBottom_toBottomOf="@id/todo_plan_mode_third_text"
+                android:id="@+id/todo_plan_mode_fourth_text"
+                android:layout_width="21dp"
+                android:layout_height="16dp"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/calendar_item_plan_mode_constraint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2.5dp"
+        android:layout_marginEnd="2.5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/calendar_item_divide_view"
+        app:layout_constraintTop_toBottomOf="@id/week_calendar_day_text">
+
+        <LinearLayout
+            android:gravity="center"
+            android:id="@+id/plan_mode_first_linear"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/plan_mode_first_img"
+                android:background="@drawable/calendar_todo_plan_text_bg"
+                android:padding="2dp"
+                android:layout_marginEnd="0.5dp"
+                android:layout_marginBottom="0.5dp"
+                android:gravity="center"
+                android:layout_width="16dp"
+                android:layout_height="16dp"/>
+
+            <ImageView
+                android:padding="2dp"
+                android:layout_marginStart="0.5dp"
+                android:background="@drawable/calendar_todo_plan_text_bg"
+                android:gravity="center"
+                android:id="@+id/plan_mode_second_img"
+                android:layout_width="16dp"
+                android:layout_height="16dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:gravity="center"
+            android:id="@+id/plan_mode_second_linear"
+            app:layout_constraintTop_toBottomOf="@id/plan_mode_first_linear"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:padding="2dp"
+                android:background="@drawable/calendar_todo_plan_text_bg"
+                android:gravity="center"
+                android:layout_marginTop="0.5dp"
+                android:layout_marginEnd="0.5dp"
+                android:id="@+id/plan_mode_third_img"
+                android:layout_width="16dp"
+                android:layout_height="16dp"/>
+
+            <ImageView
+                android:padding="2dp"
+                android:layout_marginStart="0.5dp"
+                android:background="@drawable/calendar_todo_plan_text_bg"
+                android:gravity="center"
+                android:id="@+id/plan_mode_fourth_img"
+                android:layout_width="16dp"
+                android:layout_height="16dp"/>
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/calendar_item_divide_view"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:background="@drawable/todo_week_month_calendar_item_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+            <ImageView
+                category_color_setting="@{`1`}"
+                android:id="@+id/category_color_img_12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:padding="12dp"
+                android:src="@drawable/todo_default_color_circle_img" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</layout>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="plan"
+            type="com.garam.todolist.data.Todo" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:background="@drawable/plan_item_layout_bg"
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:background="@drawable/todo_item_icon_bg"
+            plan_item_icon_setting="@{plan.icon}"
+            plan_item_icon_color_setting="@{plan.color}"
+            android:padding="5dp"
+            android:layout_marginStart="12dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/plan_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:text="@{plan.title}"
+            android:imeOptions="actionDone"
+            android:background="@null"
+            android:textAppearance="@style/plan_item_title_text_style"
+            android:textColor="@color/color_gray100"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintStart_toEndOf="@id/plan_image_view"
+            app:layout_constraintEnd_toStartOf="@id/plan_start_time_text"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/plan_title_edit_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_marginEnd="10dp"
+            set_plan_start_time_text="@{plan.startTime}"
+            android:textAppearance="@style/plan_item_start_time_text_style"
+            android:alpha="0.5"
+            app:layout_constraintEnd_toStartOf="@id/plan_edit_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/plan_start_time_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ImageButton
+            android:background="@null"
+            android:src="@drawable/todo_item_more_icon"
+            android:layout_marginEnd="14dp"
+            android:padding="5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/plan_edit_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

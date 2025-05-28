@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.garam.todolist.todoList.TodoListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="36dp"
+            android:background="@drawable/todo_edit_bottom_sheet_layout_bg"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/todo_repeat_setting_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/todo_repeat_setting_title_text"
+                android:background="@null"
+                android:id="@+id/dialog_close_btn"
+                android:src="@drawable/bottom_sheet_close_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/todo_repeat_setting_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                android:text="반복 설정"
+                android:textAppearance="@style/todo_repeat_dialog_title_text_style"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+            <TextView
+                android:textAppearance="@style/todo_repeat_dialog_save_btn_text_style"
+                android:id="@+id/todo_repeat_setting_save_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="저장"
+                app:layout_constraintBottom_toBottomOf="@id/todo_repeat_setting_title_text"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/todo_repeat_setting_title_text" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/todo_repeat_select_constraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/todo_repeat_setting_constraint_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/todo_repeat_setting_title_text">
+
+                <TextView
+                    android:id="@+id/todo_repeat_daily_btn"
+                    android:elevation="0.5dp"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/todo_repeat_type_selector"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textAppearance="@style/todo_repeat_dialog_menu_title_text_style"
+                    android:text="매일"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/todo_repeat_weekly_btn"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:elevation="0.5dp"
+                    android:id="@+id/todo_repeat_weekly_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/todo_repeat_type_selector"
+                    android:textAppearance="@style/todo_repeat_dialog_menu_title_text_style"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="매주"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/todo_repeat_monthly_btn"
+                    app:layout_constraintStart_toEndOf="@id/todo_repeat_daily_btn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:elevation="0.5dp"
+                    android:id="@+id/todo_repeat_monthly_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/todo_repeat_type_selector"
+                    android:textAppearance="@style/todo_repeat_dialog_menu_title_text_style"
+                    android:gravity="center"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:text="월간"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/todo_repeat_weekly_btn"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/todo_repeat_include_constraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toTopOf="@id/todo_repeat_end_date_constraint"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/todo_repeat_select_constraint">
+
+                <include
+                    android:visibility="gone"
+                    android:id="@+id/repeat_daily_setting_layout"
+                    layout="@layout/repeat_daily_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    bind:viewModel="@{viewModel}"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/repeat_weekly_setting_layout"
+                    layout="@layout/repeat_weekly_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    bind:viewModel="@{viewModel}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <include
+                    android:layout_marginTop="20dp"
+                    android:id="@+id/repeat_monthly_setting_layout"
+                    layout="@layout/repeat_monthly_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    bind:viewModel="@{viewModel}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            
+            <androidx.constraintlayout.widget.ConstraintLayout
+
+                android:id="@+id/todo_repeat_end_date_constraint"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/todo_repeat_include_constraint">
+                
+                <View
+                    android:background="@color/color_gray20"
+                    android:alpha="0.2"
+                    android:id="@+id/todo_repeat_end_date_divide_view"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="1.5dp"/>
+
+                <TextView
+                    android:text="종료 날짜 설정"
+                    android:textAppearance="@style/todo_repeat_dialog_end_date_title_text_style"
+                    android:id="@+id/todo_repeat_end_date_title_text"
+                    app:layout_constraintTop_toTopOf="@id/todo_repeat_end_date_switch"
+                    app:layout_constraintBottom_toBottomOf="@id/todo_repeat_end_date_switch"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:layout_marginEnd="6dp"
+                    android:id="@+id/todo_repeat_end_date_setting_text"
+                    android:textAppearance="@style/todo_repeat_dialog_end_date_setting_text_style"
+                    app:layout_constraintEnd_toStartOf="@id/todo_repeat_end_date_switch"
+                    app:layout_constraintTop_toTopOf="@id/todo_repeat_end_date_switch"
+                    app:layout_constraintBottom_toBottomOf="@id/todo_repeat_end_date_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Switch
+                    android:background="@null"
+                    android:thumb="@drawable/plan_all_day_thumb_selector"
+                    android:track="@drawable/plan_all_day_switch_selector"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginBottom="18dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/todo_repeat_end_date_divide_view"
+                    app:layout_constraintBottom_toTopOf="@id/todo_repeat_end_date_picker"
+                    android:id="@+id/todo_repeat_end_date_switch"
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <DatePicker
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:visibility="gone"
+                    android:background="@drawable/todo_repeat_end_date_picker_bg"
+                    android:layout_marginBottom="32dp"
+                    app:layout_constraintTop_toBottomOf="@id/todo_repeat_end_date_switch"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:id="@+id/todo_repeat_end_date_picker"
+                    android:calendarViewShown="false"
+                    android:datePickerMode="spinner"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

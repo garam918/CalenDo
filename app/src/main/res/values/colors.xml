@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="main_color">#292931</color>
+    <color name="main_background_color">#F6F6F6</color>
+    <color name="sub_color">#883FEF</color>
+    <color name="warning_color">#FF3752</color>
+
+
+    <color name="goal_type_monthly_color">#7777F9</color>
+
+    <color name="color_gray100">#0F0F0F</color>
+    <color name="color_gray90">#19191B</color>
+    <color name="color_gray80">#3D3E42</color>
+    <color name="color_gray70">#64656A</color>
+    <color name="color_gray60">#7A7B7F</color>
+    <color name="color_gray50">#909094</color>
+    <color name="color_gray40">#A3A5A9</color>
+    <color name="color_gray30">#B8BBBE</color>
+    <color name="color_gray20">#CCCED3</color>
+    <color name="color_gray10">#EAEAED</color>
+    <color name="color_gray0">#FCFCFC</color>
+
+    <color name="calendar_change_btn_bg_color">#E8E8E9</color>
+    <color name="week_month_goal_text_bg_color">#33FCFCFC</color>
+    <color name="week_month_goal_hint_text_color">#D1D1D3</color>
+    <color name="todo_bottom_sheet_text_view_bg_color">#EBEBED</color>
+    <color name="plan_add_btn_bg_color">#EEEEEF</color>
+    <color name="todo_repeat_menu_default_text_color">#676768</color>
+
+    <color name="todo_color_1">#292931</color>
+    <color name="todo_color_2">#883FEF</color>
+    <color name="todo_color_3">#CA4FC2</color>
+    <color name="todo_color_4">#FF358D</color>
+    <color name="todo_color_5">#FF2C41</color>
+    <color name="todo_color_6">#FF8913</color>
+    <color name="todo_color_7">#46B20B</color>
+    <color name="todo_color_8">#0ECC6D</color>
+    <color name="todo_color_9">#2EC399</color>
+    <color name="todo_color_10">#0077FF</color>
+    <color name="todo_color_11">#6F6AFF</color>
+    <color name="todo_color_12">#774526</color>
+
+</resources>

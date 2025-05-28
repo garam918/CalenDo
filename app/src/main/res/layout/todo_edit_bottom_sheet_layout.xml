@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@drawable/todo_edit_bottom_sheet_layout_bg"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="36dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:layout_marginStart="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/bottom_sheet_todo_title_text"
+            app:layout_constraintBottom_toBottomOf="@id/bottom_sheet_todo_title_text"
+            android:background="@null"
+            android:id="@+id/dialog_close_btn"
+            android:src="@drawable/bottom_sheet_close_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="24dp"
+            android:id="@+id/bottom_sheet_todo_title_text"
+            android:textAppearance="@style/todo_edit_dialog_title_text_style"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/dialog_close_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:drawableTop="@drawable/todo_repeat_icon"
+            android:gravity="center"
+            android:text="반복 설정"
+            android:drawablePadding="4dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="5dp"
+            android:textAppearance="@style/todo_edit_dialog_repeat_menu_title_text_style"
+            android:background="@drawable/todo_bottom_sheet_text_view_bg"
+            app:layout_constraintTop_toBottomOf="@id/bottom_sheet_todo_title_text"
+            app:layout_constraintEnd_toStartOf="@id/todo_today_tomorrow_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            android:id="@+id/todo_repeat_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:text="내일 하기"
+            android:drawableTop="@drawable/todo_tomorrow_icon"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="24dp"
+            android:drawablePadding="4dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp"
+            android:background="@drawable/todo_bottom_sheet_text_view_bg"
+            android:textAppearance="@style/todo_edit_dialog_repeat_menu_title_text_style"
+            app:layout_constraintTop_toTopOf="@id/todo_repeat_btn"
+            app:layout_constraintStart_toEndOf="@id/todo_repeat_btn"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:id="@+id/todo_today_tomorrow_btn"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:background="@drawable/todo_bottom_sheet_text_view_bg"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:id="@+id/todo_edit_constraint"
+            app:layout_constraintTop_toBottomOf="@id/todo_repeat_btn"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:drawableStart="@drawable/todo_priority_icon"
+                android:drawablePadding="8dp"
+                android:paddingStart="16dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:text="우선순위 등록"
+                android:textAppearance="@style/todo_edit_dialog_menu_title_text_style"
+                android:id="@+id/todo_priority_btn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:drawableStart="@drawable/todo_memo_icon"
+                android:drawablePadding="8dp"
+                android:paddingStart="16dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:text="메모"
+                android:textAppearance="@style/todo_edit_dialog_menu_title_text_style"
+                android:id="@+id/todo_memo_btn"
+                app:layout_constraintTop_toBottomOf="@id/todo_priority_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+
+            <TextView
+                android:drawableStart="@drawable/todo_category_change_icon"
+                android:drawablePadding="8dp"
+                android:paddingStart="16dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:text="카테고리 변경"
+                android:textAppearance="@style/todo_edit_dialog_menu_title_text_style"
+                android:id="@+id/todo_category_change_btn"
+                app:layout_constraintTop_toBottomOf="@id/todo_memo_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="35dp"
+            android:id="@+id/todo_delete_constraint"
+            app:layout_constraintTop_toBottomOf="@id/todo_edit_constraint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:background="@drawable/todo_bottom_sheet_text_view_bg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/todo_repeat_end_date_btn"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:drawableStart="@drawable/todo_repeat_end_icon"
+                android:drawablePadding="8dp"
+                android:text="오늘까지만 반복"
+                android:paddingStart="16dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:textAppearance="@style/todo_edit_dialog_menu_title_text_style"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                app:layout_constraintTop_toBottomOf="@id/todo_repeat_end_date_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:drawableStart="@drawable/todo_delete_icon"
+                android:drawablePadding="8dp"
+                android:text="삭제"
+                android:paddingStart="16dp"
+                android:paddingTop="13dp"
+                android:paddingBottom="13dp"
+                android:textAppearance="@style/todo_edit_dialog_menu_title_text_style"
+                android:id="@+id/todo_delete_btn"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

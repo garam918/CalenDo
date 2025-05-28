@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">캘린두!</string>
+
+    <string name="google_web_client_id">340758304072-5crudh1t1hkrajnugik01suou441c4kp.apps.googleusercontent.com</string>
+    <string name="anonymous_login_btn_text"><u>로그인 없이 사용</u></string>
+    <string name="terms_of_use_string">https://www.termsfeed.com/live/743c79b3-cb46-4843-8293-83ed1f4f77fd</string>
+    <string name="privacy_policy_string">https://www.privacypolicies.com/live/dbb29b1d-5325-48cd-8a66-e79273f79b05</string>
+    <string name="calendo_feedback_link_string">https://docs.google.com/forms/d/1kSKdNMfWOiWGyBpEFmFlyGFgVP9aiN_yK3gPSQEYdNg/edit</string>
+
+</resources>

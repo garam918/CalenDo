@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.onboarding.OnboardingFirstFragment">
+
+        <TextView
+            android:text="캘린두!"
+            android:layout_marginTop="80dp"
+            android:textAppearance="@style/onboarding_title_text_style"
+            android:id="@+id/onboarding_first_title_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:textAppearance="@style/onboarding_explain_text_style"
+            android:text="일정 캘린더와 투두리스트를  한 번에!\n두 마리 토끼를 잡는 똑똑한 관리"
+            android:id="@+id/onboarding_first_explain_text"
+            app:layout_constraintTop_toBottomOf="@id/onboarding_first_title_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <FrameLayout
+            android:id="@+id/onboarding_first_img_frame"
+            android:layout_marginTop="65dp"
+            app:layout_constraintTop_toBottomOf="@id/onboarding_first_explain_text"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:alpha="0.6"
+                android:layout_gravity="center"
+                android:id="@+id/onboarding_first_calendar_img"
+                android:src="@drawable/onboarding_calendar_img"
+                android:layout_width="380dp"
+                android:layout_height="330dp"/>
+
+            <ImageView
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center"
+                android:id="@+id/onboarding_first_calendo_img"
+                android:src="@drawable/onboarding_first_calendo_img"
+                android:layout_width="255dp"
+                android:layout_height="305dp"/>
+
+
+
+        </FrameLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

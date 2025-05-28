@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.garam.todolist.todoList.TodoListViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <HorizontalScrollView
+            android:visibility="gone"
+            android:scrollbars="none"
+            android:id="@+id/repeat_week_setting_horizontal_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <GridLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="4">
+
+                <TextView
+                    android:id="@+id/repeat_weekly_every_week_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/todo_daily_repeat_btn_selector"
+                    android:paddingStart="21dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="21dp"
+                    android:paddingBottom="12dp"
+                    android:text="매주"
+                    android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style" />
+
+                <TextView
+                    android:id="@+id/repeat_weekly_first_week_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/todo_daily_repeat_btn_selector"
+                    android:paddingStart="21dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="21dp"
+                    android:paddingBottom="12dp"
+                    android:text="첫째주"
+                    android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style" />
+
+                <TextView
+                    android:id="@+id/repeat_weekly_second_week_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/todo_daily_repeat_btn_selector"
+                    android:layout_marginStart="5dp"
+                    android:layout_marginEnd="5dp"
+                    android:paddingStart="21dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="21dp"
+                    android:paddingBottom="12dp"
+                    android:text="둘째주"
+                    android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style" />
+
+                <TextView
+                    android:id="@+id/repeat_weekly_third_week_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/todo_daily_repeat_btn_selector"
+                    android:layout_marginStart="5dp"
+                    android:paddingStart="21dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="21dp"
+                    android:paddingBottom="12dp"
+                    android:text="셋째주"
+                    android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style" />
+
+                <TextView
+                    android:id="@+id/repeat_weekly_fourth_week_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/todo_daily_repeat_btn_selector"
+                    android:layout_marginEnd="5dp"
+                    android:paddingStart="21dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="21dp"
+                    android:paddingBottom="12dp"
+                    android:text="넷째주"
+                    android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style" />
+
+                <TextView
+                    android:id="@+id/repeat_weekly_last_week_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/todo_daily_repeat_btn_selector"
+                    android:paddingStart="21dp"
+                    android:paddingTop="12dp"
+                    android:paddingEnd="21dp"
+                    android:paddingBottom="12dp"
+                    android:text="마지막주"
+                    android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style" />
+
+            </GridLayout>
+
+        </HorizontalScrollView>
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/repeat_week_setting_divide_view"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/color_gray20"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repeat_week_setting_horizontal_scroll" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/repeat_day_setting_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/repeat_week_setting_divide_view">
+
+            <TextView
+                android:id="@+id/repeat_monday_text_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:background="@drawable/todo_repeat_day_bg_selector"
+                android:gravity="center"
+
+                android:text="월"
+                android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/repeat_tuesday_text_view"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/repeat_tuesday_text_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="13dp"
+                android:background="@drawable/todo_repeat_day_bg_selector"
+                android:gravity="center"
+
+                android:text="화"
+                android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/repeat_wednesday_text_view"
+                app:layout_constraintStart_toEndOf="@id/repeat_monday_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/repeat_wednesday_text_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="13dp"
+                android:background="@drawable/todo_repeat_day_bg_selector"
+                android:gravity="center"
+
+                android:text="수"
+                android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/repeat_thursday_text_view"
+                app:layout_constraintStart_toEndOf="@id/repeat_tuesday_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/repeat_thursday_text_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="13dp"
+                android:background="@drawable/todo_repeat_day_bg_selector"
+                android:gravity="center"
+
+                android:text="목"
+                android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/repeat_friday_text_view"
+                app:layout_constraintStart_toEndOf="@id/repeat_wednesday_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/repeat_friday_text_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="13dp"
+                android:background="@drawable/todo_repeat_day_bg_selector"
+                android:gravity="center"
+
+                android:text="금"
+                android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/repeat_saturday_text_view"
+                app:layout_constraintStart_toEndOf="@id/repeat_thursday_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/repeat_saturday_text_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="13dp"
+                android:background="@drawable/todo_repeat_day_bg_selector"
+                android:gravity="center"
+
+                android:text="토"
+                android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/repeat_sunday_text_view"
+                app:layout_constraintStart_toEndOf="@id/repeat_friday_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/repeat_sunday_text_view"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="13dp"
+                android:background="@drawable/todo_repeat_day_bg_selector"
+                android:gravity="center"
+
+                android:text="일"
+                android:textAppearance="@style/todo_repeat_dialog_start_date_menu_title_text_style"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/repeat_saturday_text_view"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

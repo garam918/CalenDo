@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_navigation"
+    app:startDestination="@id/settingMainFragment">
+
+    <fragment
+        android:id="@+id/settingMainFragment"
+        android:name="com.garam.todolist.ui.setting.SettingMainFragment"
+        android:label="fragment_setting_main"
+        tools:lauyot="@layout/fragment_setting_main">
+
+        <action
+            android:id="@+id/action_settingMainFragment_to_accountSettingFragment"
+            app:destination="@id/account_setting_fragment"/>
+
+
+        <action
+            android:id="@+id/action_settingMainFragment_to_screenSettingFragment"
+            app:destination="@id/screen_setting_fragment"/>
+
+        <action
+            android:id="@+id/action_settingMainFragment_to_categoryEditFragment"
+            app:destination="@id/category_edit_fragment"/>
+    </fragment>
+
+    <fragment
+        android:id="@+id/account_setting_fragment"
+        android:name="com.garam.todolist.ui.setting.MyAccountFragment"
+        android:label="fragment_account_setting"
+        tools:lauyot="@layout/fragment_my_account">
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/screen_setting_fragment"
+        android:name="com.garam.todolist.ui.setting.ScreenSettingFragment"
+        android:label="fragment_screen_setting"
+        tools:lauyot="@layout/fragment_screen_setting">
+
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/category_edit_fragment"
+        android:name="com.garam.todolist.ui.setting.CategoryEditFragment"
+        android:label="fragment_category_edit"
+        tools:lauyot="@layout/fragment_category_edit">
+
+
+    </fragment>
+
+</navigation>

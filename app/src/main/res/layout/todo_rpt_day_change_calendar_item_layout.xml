@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView
+    android:id="@+id/week_calendar_day_text"
+    android:layout_width="32dp"
+    android:layout_height="32dp"
+    android:gravity="center"
+    android:background="@drawable/todo_rpt_day_change_calendar_item_default_bg"
+    android:textAppearance="@style/calendar_default_text_style"
+    android:textSize="14sp"
+    android:text="1"
+    android:layout_margin="7dp"
+    xmlns:android="http://schemas.android.com/apk/res/android" />

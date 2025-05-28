@@ -1,0 +1,420 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="spoqa_bold_text_style">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/spoqa_han_sans_neo_bold</item>
+    </style>
+
+    <style name="spoqa_medium_text_style">
+        <item name="android:fontFamily">@font/spoqa_han_sans_neo_medium</item>
+    </style>
+
+    <style name="spoqa_regular_text_style">
+        <item name="android:fontFamily">@font/spoqa_han_sans_neo_regular</item>
+    </style>
+
+    <style name="spinnaker_regular_text_style">
+        <item name="android:fontFamily">@font/spinnaker_regular</item>
+    </style>
+
+    <style name="paperlogy_bold_text_style">
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/paperlogy_bold</item>
+    </style>
+
+    <style name="onboarding_title_text_style" parent="paperlogy_bold_text_style">
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">34sp</item>
+    </style>
+
+    <style name="onboarding_explain_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray80</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="social_login_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="kakao_login_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="naver_login_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="google_login_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="social_anonymous_login_btn_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray60</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="login_terms_policy_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray50</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+
+
+    <style name="todo_mode_text_style" parent="paperlogy_bold_text_style">
+        <item name="android:textColor">@color/todo_mode_text_color</item>
+        <item name="android:textSize">19sp</item>
+    </style>
+
+    <style name="todo_calendar_current_date_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/color_gray80</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="calendar_item_calendo_mode_count_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">9sp</item>
+    </style>
+
+    <style name="todo_calendar_today_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray70</item>
+        <item name="android:font">@font/spoqa_han_sans_neo_medium</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="todo_calendar_week_month_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray90</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="todo_calendar_day_week_title_default_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray90</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="todo_calendar_day_week_title_selected_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray90</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="category_all_btn_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="category_add_btn_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="category_horizon_item_title_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="category_item_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="goal_type_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray0</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="goal_title_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray0</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="todo_in_goal_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray0</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="todo_in_goal_empty_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray0</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="todo_count_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray40</item>
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="todo_item_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="category_add_dialog_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="category_add_dialog_save_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="category_add_dialog_category_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="category_add_dialog_menu_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray90</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="todo_edit_dialog_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="todo_edit_dialog_repeat_menu_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="todo_edit_dialog_menu_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="todo_repeat_dialog_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="todo_repeat_dialog_save_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="todo_repeat_dialog_menu_title_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/todo_repeat_menu_title_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="todo_repeat_dialog_start_date_menu_title_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/todo_repeat_start_date_menu_title_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="todo_repeat_dialog_end_date_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="todo_repeat_dialog_end_date_setting_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="todo_repeat_dialog_current_month_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray90</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="todo_memo_dialog_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="todo_category_change_dialog_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="todo_category_change_dialog_save_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="todo_category_change_dialog_category_item_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/main_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="todo_plan_title_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray60</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="plan_add_btn_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray60</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="plan_item_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="plan_item_start_time_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="plan_add_dialog_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="plan_add_dialog_save_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="plan_add_dialog_plan_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="plan_add_dialog_menu_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray90</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="plan_add_dialog_delete_btn_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray100</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="plan_add_dialog_selected_repeat_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/color_gray90</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="plan_add_dialog_repeat_btn_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textColor">@color/plan_repeat_btn_text_color</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+
+    <style name="calendar_default_text_style" parent="spinnaker_regular_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray40</item>
+    </style>
+
+    <style name="calendar_out_date_text_style" parent="spinnaker_regular_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray20</item>
+    </style>
+
+    <style name="calendar_today_text_style" parent="spinnaker_regular_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray90</item>
+    </style>
+
+    <style name="calendar_selected_text_style" parent="spinnaker_regular_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray0</item>
+    </style>
+
+    <style name="todo_monthly_rpt_day_text_style" parent="spinnaker_regular_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/todo_repeat_start_date_menu_title_color</item>
+    </style>
+
+    <style name="todo_daily_repeat_calendar_selected_text_style" parent="spinnaker_regular_text_style">
+        <item name="android:textColor">@color/color_gray0</item>
+    </style>
+
+    <style name="todo_daily_repeat_calendar_default_text_style" parent="spinnaker_regular_text_style">
+        <item name="android:textColor">@color/color_gray80</item>
+    </style>
+
+    <style name="setting_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/main_color</item>
+    </style>
+
+    <style name="setting_feedback_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+    </style>
+
+    <style name="setting_feedback_explain_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">11sp</item>
+        <item name="android:textColor">@color/main_color</item>
+    </style>
+
+    <style name="setting_feedback_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_gray0</item>
+    </style>
+
+    <style name="setting_menu_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+    </style>
+
+    <style name="setting_screen_setting_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_gray60</item>
+    </style>
+
+
+
+    <style name="setting_account_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_gray40</item>
+    </style>
+
+    <style name="setting_account_delete_btn_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/warning_color</item>
+    </style>
+
+    <style name="setting_account_delete_dialog_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+    </style>
+
+    <style name="setting_account_delete_dialog_explain_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+    </style>
+
+    <style name="setting_account_delete_dialog_keep_use_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_gray80</item>
+    </style>
+
+    <style name="setting_account_delete_dialog_delete_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/warning_color</item>
+    </style>
+
+    <style name="setting_app_restart_dialog_restart_btn_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_gray0</item>
+    </style>
+
+
+
+    <style name="setting_screen_custom_dialog_title_text_style" parent="spoqa_bold_text_style">
+        <item name="android:textSize">13sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+    </style>
+
+    <style name="setting_screen_custom_dialog_menu_text_style" parent="spoqa_medium_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+    </style>
+
+
+
+    <style name="setting_version_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_gray40</item>
+    </style>
+
+
+</resources>

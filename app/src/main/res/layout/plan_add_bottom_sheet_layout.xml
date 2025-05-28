@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+        <variable
+            name="plan"
+            type="com.garam.todolist.data.Todo" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/todo_edit_bottom_sheet_layout_bg"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.core.widget.NestedScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:paddingStart="24dp"
+                android:paddingEnd="24dp"
+                android:scrollbars="none"
+                android:fillViewport="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageButton
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/plan_add_title_text"
+                        app:layout_constraintBottom_toBottomOf="@id/plan_add_title_text"
+                        android:background="@null"
+                        android:id="@+id/dialog_close_btn"
+                        android:src="@drawable/bottom_sheet_close_icon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                    <TextView
+                        android:id="@+id/plan_add_title_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="18dp"
+                        android:text="일정 추가"
+                        android:textAppearance="@style/plan_add_dialog_title_text_style"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/plan_save_btn"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:text="저장"
+                        android:textAppearance="@style/plan_add_dialog_save_btn_text_style"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/plan_add_title_text" />
+
+                    <EditText
+                        android:id="@+id/plan_title_edit_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:text="@{plan.title}"
+                        android:maxLines="3"
+                        android:inputType="text"
+                        android:background="@drawable/plan_add_layout_constraint_bg"
+                        android:hint="일정 제목을 입력해 주세요."
+                        android:paddingStart="14dp"
+                        android:paddingTop="14dp"
+                        android:paddingBottom="14dp"
+                        android:textAppearance="@style/plan_add_dialog_plan_title_text_style"
+                        android:textColor="@color/color_gray100"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/plan_add_title_text" />
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/plan_icon_setting_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/plan_add_layout_constraint_bg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/plan_title_edit_text">
+
+                        <TextView
+                            android:id="@+id/plan_icon_title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:text="아이콘"
+                            android:textAppearance="@style/plan_add_dialog_menu_title_text_style"
+                            app:layout_constraintBottom_toTopOf="@id/plan_icon_setting_expand_view"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/plan_icon_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="5dp"
+                            android:background="@drawable/todo_item_icon_bg"
+                            android:src="@drawable/todo_icon_home"
+                            android:layout_marginEnd="10dp"
+                            app:layout_constraintBottom_toBottomOf="@id/plan_icon_setting_expand_btn"
+                            app:layout_constraintEnd_toStartOf="@id/plan_icon_setting_expand_btn"
+                            app:layout_constraintTop_toTopOf="@id/plan_icon_setting_expand_btn" />
+
+                        <ImageView
+                            android:id="@+id/plan_icon_setting_expand_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="14dp"
+                            android:background="@null"
+                            android:padding="5dp"
+                            android:src="@drawable/plan_expand_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/plan_icon_title_text"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/plan_icon_title_text" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/plan_icon_setting_expand_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/plan_icon_title_text">
+
+                            <View
+                                android:id="@+id/plan_icon_divide_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/plan_icon_recycler"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/plan_icon_divide_view" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/plan_color_setting_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="14dp"
+                        android:background="@drawable/plan_add_layout_constraint_bg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/plan_icon_setting_constraint">
+
+                        <TextView
+
+                            android:id="@+id/plan_color_title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:text="색상"
+                            android:textAppearance="@style/plan_add_dialog_menu_title_text_style"
+                            app:layout_constraintBottom_toTopOf="@id/plan_color_setting_expand_view"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:src="@drawable/todo_default_color_circle_img"
+                            android:layout_marginEnd="10dp"
+                            android:padding="4dp"
+                            android:id="@+id/plan_color_img"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@id/plan_color_setting_expand_btn"
+                            app:layout_constraintEnd_toStartOf="@id/plan_color_setting_expand_btn"
+                            app:layout_constraintTop_toTopOf="@id/plan_color_setting_expand_btn" />
+
+                        <ImageView
+                            android:id="@+id/plan_color_setting_expand_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="14dp"
+                            android:background="@null"
+                            android:padding="5dp"
+                            android:src="@drawable/plan_expand_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/plan_color_title_text"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/plan_color_title_text" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/plan_color_setting_expand_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/plan_color_title_text">
+
+                            <View
+                                android:id="@+id/plan_color_divide_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/color_gray10"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <include
+                                android:id="@+id/plan_color_setting_layout"
+
+                                layout="@layout/category_color_setting_layout"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/plan_color_divide_view" />
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/plan_repeat_setting_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/plan_add_layout_constraint_bg"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/plan_color_setting_constraint">
+
+                        <TextView
+                            android:id="@+id/plan_repeat_title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:text="반복"
+                            android:textAppearance="@style/plan_add_dialog_menu_title_text_style"
+                            app:layout_constraintBottom_toTopOf="@id/plan_repeat_setting_expand_view"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:text="안 함"
+                            android:id="@+id/plan_repeat_setting_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:alpha="0.5"
+                            android:layout_marginEnd="10dp"
+                            android:textAppearance="@style/plan_add_dialog_selected_repeat_text_style"
+                            app:layout_constraintBottom_toBottomOf="@id/plan_repeat_setting_expand_btn"
+                            app:layout_constraintEnd_toStartOf="@id/plan_repeat_setting_expand_btn"
+                            app:layout_constraintTop_toTopOf="@id/plan_repeat_setting_expand_btn" />
+
+                        <ImageView
+                            android:id="@+id/plan_repeat_setting_expand_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="14dp"
+                            android:background="@null"
+                            android:padding="5dp"
+                            android:src="@drawable/plan_expand_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/plan_repeat_title_text"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/plan_repeat_title_text" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/plan_repeat_setting_expand_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/plan_repeat_title_text">
+
+                            <View
+                                android:id="@+id/plan_repeat_divide_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:background="@color/color_gray10"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TextView
+                                android:id="@+id/plan_repeat_weekly_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:background="@drawable/plan_rpt_btn_selector"
+                                android:paddingStart="21dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="21dp"
+                                android:paddingBottom="7dp"
+                                android:textAppearance="@style/plan_add_dialog_repeat_btn_text_style"
+                                android:text="매주"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toStartOf="@id/plan_repeat_monthly_btn"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@id/plan_repeat_divide_view" />
+
+                            <TextView
+                                android:id="@+id/plan_repeat_monthly_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:background="@drawable/plan_rpt_btn_selector"
+                                android:paddingStart="21dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="21dp"
+                                android:paddingBottom="7dp"
+                                android:text="매월"
+                                android:textAppearance="@style/plan_add_dialog_repeat_btn_text_style"
+                                app:layout_constraintBottom_toBottomOf="@id/plan_repeat_weekly_btn"
+                                app:layout_constraintEnd_toStartOf="@id/plan_repeat_yearly_btn"
+                                app:layout_constraintStart_toEndOf="@id/plan_repeat_weekly_btn"
+                                app:layout_constraintTop_toTopOf="@id/plan_repeat_weekly_btn" />
+
+                            <TextView
+                                android:id="@+id/plan_repeat_yearly_btn"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="10dp"
+                                android:background="@drawable/plan_rpt_btn_selector"
+                                android:paddingStart="21dp"
+                                android:paddingTop="7dp"
+                                android:paddingEnd="21dp"
+                                android:paddingBottom="7dp"
+                                android:text="매년"
+                                android:textAppearance="@style/plan_add_dialog_repeat_btn_text_style"
+                                app:layout_constraintBottom_toBottomOf="@id/plan_repeat_monthly_btn"
+                                app:layout_constraintStart_toEndOf="@id/plan_repeat_monthly_btn"
+                                app:layout_constraintTop_toTopOf="@id/plan_repeat_monthly_btn" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/plan_all_day_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/plan_add_layout_constraint_bg"
+                        android:paddingTop="10dp"
+                        android:paddingBottom="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/plan_repeat_setting_constraint">
+
+                        <TextView
+                            android:id="@+id/plan_all_day_title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:text="하루종일"
+                            android:textAppearance="@style/plan_add_dialog_menu_title_text_style"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <Switch
+                            android:id="@+id/plan_all_day_setting_switch"
+                            android:layout_width="wrap_content"
+                            android:layout_height="28dp"
+                            android:layout_marginEnd="14dp"
+                            android:background="@null"
+                            android:thumb="@drawable/plan_all_day_thumb_selector"
+                            android:track="@drawable/plan_all_day_switch_selector"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:switchMinWidth="45dp" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/plan_start_time_setting_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/plan_add_layout_constraint_bg"
+                        app:layout_constraintBottom_toTopOf="@id/plan_delete_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/plan_all_day_constraint">
+
+                        <TextView
+                            android:id="@+id/plan_start_time_title_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginTop="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:text="시작시간"
+                            android:textAppearance="@style/plan_add_dialog_menu_title_text_style"
+                            app:layout_constraintBottom_toTopOf="@id/plan_start_time_setting_expand_view"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <TextView
+                            android:paddingTop="5dp"
+                            android:paddingBottom="5dp"
+                            android:paddingStart="11dp"
+                            android:paddingEnd="11dp"
+                            set_plan_start_time_text="@{plan.startTime}"
+                            android:background="@drawable/plan_start_time_text_bg"
+                            android:id="@+id/plan_start_time_setting_text"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            app:layout_constraintBottom_toBottomOf="@id/plan_start_time_setting_expand_btn"
+                            app:layout_constraintEnd_toStartOf="@id/plan_start_time_setting_expand_btn"
+                            app:layout_constraintTop_toTopOf="@id/plan_start_time_setting_expand_btn" />
+
+                        <ImageView
+                            android:id="@+id/plan_start_time_setting_expand_btn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="14dp"
+                            android:background="@null"
+                            android:padding="5dp"
+                            android:src="@drawable/plan_expand_icon"
+                            app:layout_constraintBottom_toBottomOf="@id/plan_start_time_title_text"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@id/plan_start_time_title_text" />
+
+                        <androidx.constraintlayout.widget.ConstraintLayout
+                            android:id="@+id/plan_start_time_setting_expand_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="14dp"
+                            android:layout_marginEnd="14dp"
+                            android:layout_marginBottom="14dp"
+                            android:visibility="gone"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/plan_start_time_title_text">
+
+                            <View
+                                android:id="@+id/plan_start_time_divide_view"
+                                android:layout_width="match_parent"
+                                android:layout_height="1dp"
+                                android:layout_marginTop="14dp"
+                                android:background="@color/color_gray10"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toTopOf="parent" />
+
+                            <TimePicker
+                                android:focusable="false"
+                                android:focusableInTouchMode="false"
+                                android:id="@+id/plan_start_time_picker"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="14dp"
+                                android:timePickerMode="spinner"
+                                app:layout_constraintBottom_toBottomOf="parent"
+                                app:layout_constraintEnd_toEndOf="parent"
+                                app:layout_constraintStart_toStartOf="parent"
+                                app:layout_constraintTop_toBottomOf="@+id/plan_start_time_divide_view" />
+
+
+                        </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                    <TextView
+                        android:id="@+id/plan_delete_btn"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="24dp"
+                        android:background="@drawable/plan_delete_btn_bg"
+                        android:drawableStart="@drawable/todo_delete_icon"
+                        android:drawablePadding="8dp"
+                        android:paddingStart="16dp"
+                        android:paddingTop="14dp"
+                        android:paddingBottom="14dp"
+                        android:text="삭제하기"
+                        android:textAppearance="@style/plan_add_dialog_delete_btn_text_style"
+                        android:visibility="gone"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/plan_start_time_setting_constraint" />
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </androidx.core.widget.NestedScrollView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
