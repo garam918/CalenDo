@@ -37,6 +37,8 @@
                 android:imeOptions="actionDone"
                 android:text="@{todo.title}"
                 android:background="@null"
+                android:maxLines="3"
+                android:inputType="text"
                 android:textAppearance="@style/todo_in_goal_title_text_style"
                 android:textColor="@color/color_gray0"
                 app:layout_constraintEnd_toStartOf="@id/todo_item_img_linear"

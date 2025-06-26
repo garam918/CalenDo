@@ -456,18 +456,46 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/todo_list_category_horizon_scroll_view" />
 
-                    <androidx.recyclerview.widget.RecyclerView
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_marginTop="18dp"
                         android:visibility="gone"
-                        android:id="@+id/selected_category_todo_list_recycler_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:nestedScrollingEnabled="false"
-                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/todo_list_category_horizon_scroll_view" />
+                        app:layout_constraintTop_toBottomOf="@id/todo_list_category_horizon_scroll_view"
+                        android:id="@+id/selected_category_todo_list_constraint"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
 
+                        <TextView
+                            android:background="@drawable/plan_add_btn_bg"
+                            android:drawableEnd="@drawable/todo_add_icon"
+                            android:paddingStart="12dp"
+                            android:paddingTop="14dp"
+                            android:paddingEnd="15dp"
+                            android:paddingBottom="14dp"
+                            android:text="할일 추가하기"
+                            android:textAppearance="@style/plan_add_btn_text_style"
+                            app:layout_constraintTop_toTopOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            android:id="@+id/selected_category_todo_add_btn"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"/>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/selected_category_todo_list_recycler_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:nestedScrollingEnabled="false"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/selected_category_todo_add_btn" />
+
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

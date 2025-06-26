@@ -118,7 +118,7 @@ object DatabaseModule {
                         color = "default_color_1",
                         userId = ""
                     )
-                    provideDataBase(context).categoryDao().insertCategory(preCategory)
+//                    provideDataBase(context).categoryDao().insertCategory(preCategory)
 
                     val preTodoList = listOf(
                         LocalTodo(
@@ -174,9 +174,9 @@ object DatabaseModule {
                         ))
 
 
-                    preTodoList.forEach {
-                        provideDataBase(context).todoDao().saveTodo(it)
-                    }
+//                    preTodoList.forEach {
+//                        provideDataBase(context).todoDao().saveTodo(it)
+//                    }
 
                 }
             }

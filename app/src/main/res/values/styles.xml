@@ -75,7 +75,7 @@
         <item name="android:textSize">12sp</item>
     </style>
 
-    <style name="calendar_item_calendo_mode_count_text_style" parent="spoqa_regular_text_style">
+    <style name="calendar_item_calendo_mode_count_text_style" parent="spoqa_medium_text_style">
         <item name="android:textColor">@color/black</item>
         <item name="android:textSize">9sp</item>
     </style>

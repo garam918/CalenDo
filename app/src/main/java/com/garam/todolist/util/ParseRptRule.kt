@@ -13,6 +13,13 @@ fun isDateMatchingRule(date: LocalDate, rule: String): Boolean {
     val parsedRule = parseRRule(rule)
     val frequency = parsedRule["FREQ"] ?: return false
     val interval = parsedRule["INTERVAL"]?.toInt() ?: 1
+    val until = parsedRule["UNTIL"] ?: ""
+
+    if(until != "") {
+        if(date.isAfter(LocalDate.parse(until))) return false
+    }
+
+
 
     when (frequency) {
         "DAILY" -> {

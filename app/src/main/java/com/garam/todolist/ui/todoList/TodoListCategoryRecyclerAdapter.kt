@@ -87,7 +87,9 @@ class TodoListCategoryRecyclerAdapter(private val categoryClickListener : Catego
             val list = filterTodosByDate(categoryWithTodo.todoList.toMutableList(), LocalDate.parse(selectedDate.toString()))
 
             adapter.submitList(list.sortedByDescending {
-                when(sortMode) {
+                val priorityRank = if (it.priority == true) 1L else 0L
+
+                val sortRank = when(sortMode) {
                     "Saved" -> {
                         it.savedTime.toInstant().epochSecond
                     }
@@ -95,7 +97,6 @@ class TodoListCategoryRecyclerAdapter(private val categoryClickListener : Catego
                         val isCompleted = it.status?.values?.contains(TodoStatus.COMPLETED) == true
                         val completedRank = if (isCompleted) 0 else 1
                         completedRank * 1_000_000_000L + it.savedTime.toInstant().epochSecond
-//                        -completedRank * 1_000_000_000L - it.savedTime.toInstant().epochSecond
                     }
                     "Completed" -> {
                         val isCompleted = it.status?.values?.contains(TodoStatus.COMPLETED) == true
@@ -104,9 +105,10 @@ class TodoListCategoryRecyclerAdapter(private val categoryClickListener : Catego
                     }
                     else -> {
                         it.savedTime.toInstant().epochSecond
-
                     }
                 }
+
+                priorityRank * 1_000_000_000_000_000_000 + sortRank
             }) {
 
                 todoClickListener.submitTodoCount(categoryWithTodo.category.categoryId, list.size)

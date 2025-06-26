@@ -46,3 +46,9 @@ fun generateRepeatRule(
 
     return rule.joinToString(";")
 }
+
+fun addUntilToRRule(rule: String, untilDate: String): String {
+    val components = rule.split(";").filter { !it.startsWith("UNTIL=") }.toMutableList()
+    components.add("UNTIL=${untilDate}")
+    return components.joinToString(";")
+}

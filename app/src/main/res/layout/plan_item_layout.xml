@@ -33,6 +33,8 @@
             android:background="@null"
             android:textAppearance="@style/plan_item_title_text_style"
             android:textColor="@color/color_gray100"
+            android:maxLines="3"
+            android:inputType="text"
             android:layout_marginStart="10dp"
             android:layout_marginTop="12dp"
             android:layout_marginBottom="12dp"

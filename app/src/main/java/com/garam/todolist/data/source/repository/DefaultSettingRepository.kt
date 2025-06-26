@@ -1,9 +1,12 @@
 package com.garam.todolist.data.source.repository
 
+import com.garam.todolist.data.Category
+import com.garam.todolist.data.Todo
 import com.garam.todolist.data.UserData
 import com.garam.todolist.data.UserIdProvider
 import com.garam.todolist.data.source.SharedPreferenceStorage
 import com.garam.todolist.data.source.local.AccountDao
+import com.garam.todolist.data.source.local.CategoryDao
 import com.garam.todolist.data.source.local.TodoDao
 import com.garam.todolist.data.source.network.FirebaseUserData
 import com.garam.todolist.data.source.network.NetworkCategory
@@ -27,6 +30,7 @@ import javax.inject.Singleton
 class DefaultSettingRepository @Inject constructor(
     private val accountDataSource : AccountDao,
     private val todoDao : TodoDao,
+    private val categoryDao : CategoryDao,
     private val userIdProvider: UserIdProvider,
     private val auth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
@@ -119,4 +123,8 @@ class DefaultSettingRepository @Inject constructor(
     override suspend fun setFirstDayOfWeek(firstDayOfWeek: String) = preferenceStorage.saveFirstDayOfWeek(firstDayOfWeek)
 
 
+    override suspend fun upsertTodo(todo: Todo, uid: String) = todoDao.upsertTodo(todo.toLocal(uid))
+
+    override suspend fun upsertCategory(category: Category, uid: String)
+    = categoryDao.upsertCategory(category.toLocal(uid))
 }

@@ -1,5 +1,7 @@
 package com.garam.todolist.data.source.repository
 
+import com.garam.todolist.data.Category
+import com.garam.todolist.data.Todo
 import com.garam.todolist.data.UserData
 import com.garam.todolist.data.source.local.LocalUserData
 import kotlinx.coroutines.flow.Flow
@@ -15,6 +17,8 @@ interface SettingRepository {
     suspend fun logoutAccount(uid: String)
     suspend fun deleteAccount(uid: String)
 
+    suspend fun upsertTodo(todo: Todo, uid: String)
+    suspend fun upsertCategory(category: Category, uid: String)
 
     suspend fun saveTodoList(uid: String)
     suspend fun saveCategoryList(uid: String)

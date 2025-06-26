@@ -91,7 +91,7 @@
                     android:layout_marginBottom="16dp"
                     android:layout_marginEnd="12dp"
                     android:layout_marginStart="12dp"
-                    android:stateListAnimator="@null"
+
                     android:textAppearance="@style/setting_feedback_btn_text_style"
                     app:layout_constraintTop_toBottomOf="@id/setting_feedback_explain_text"
                     app:layout_constraintBottom_toBottomOf="parent"

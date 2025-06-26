@@ -70,6 +70,7 @@ class TodoListViewModel @Inject constructor(
     private val _selectedDatePlanList = MutableStateFlow<List<Todo>>(emptyList())
     val selectedDatePlanList : StateFlow<List<Todo>> = _selectedDatePlanList
 
+    val currentSelectedCategory = MutableStateFlow<Category?>(null)
     val selectedCategoryTodoList = MutableStateFlow<List<Todo>>(emptyList())
 
     val datePlanMap = MutableStateFlow<MutableMap<String, List<Todo>>>(mutableMapOf())
@@ -167,10 +168,16 @@ class TodoListViewModel @Inject constructor(
 
     fun getTodoByGoal(goalId : String) = viewModelScope.launch(Dispatchers.IO) {
 
+        Log.e("getTodoByGoal",goalId)
+
         todoRepository.getTodoByGoal(goalId = goalId).collectLatest {
             _currentTodoInGoal.value = emptyList<Todo>()
-            _currentTodoInGoal.value = it
 
+            if(it.isNotEmpty() && currentGoal.value?.goalId == it.first().categoryId) _currentTodoInGoal.value = it
+            else _currentTodoInGoal.value = emptyList()
+
+
+//            Log.e("currentTodoGoal",_currentTodoInGoal.value.first().categoryId.toString())
             Log.e("currentTodoList",_currentTodoInGoal.value.toString())
         }
     }
@@ -198,12 +205,8 @@ class TodoListViewModel @Inject constructor(
     }
 
     fun addTodoInGoal(startDate: String, endDate: String, goalId: String) = viewModelScope.launch {
-        val statusMap = mutableMapOf<String, TodoStatus>()
-
-//        for(i in 0 .. LocalDate.parse(endDate) - LocalDate.parse(startDate)) {
-//            statusMap[]
-//        }
-
+        Log.e("vmGoalId",goalId)
+        Log.e("vmCurrentGoalId",currentGoal.value?.goalId.toString())
 
         if(currentTodoInGoal.value.isEmpty()) {
 

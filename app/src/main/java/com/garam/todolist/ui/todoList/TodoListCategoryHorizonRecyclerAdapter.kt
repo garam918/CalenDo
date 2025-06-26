@@ -11,6 +11,8 @@ import com.garam.todolist.util.clickListener.CategoryFilterClickListener
 
 class TodoListCategoryHorizonRecyclerAdapter(private val filterClickListener: CategoryFilterClickListener) : ListAdapter<Category, TodoListCategoryHorizonRecyclerAdapter.ViewHolder>(diffUtil) {
 
+    var currentPosition = -1
+
     companion object {
 
         val diffUtil = object : DiffUtil.ItemCallback<Category>() {
@@ -42,10 +44,17 @@ class TodoListCategoryHorizonRecyclerAdapter(private val filterClickListener: Ca
 
             binding.category = category
 
+            if(currentPosition == absoluteAdapterPosition) binding.root.alpha = 1f
+            else binding.root.alpha = 0.4f
+
             binding.root.setOnClickListener {
 
-                // 카테고리 필터
-                filterClickListener.categoryFilter(category)
+                currentPosition = absoluteAdapterPosition
+
+                notifyDataSetChanged()
+
+                binding.root.alpha = 1f
+                filterClickListener.categoryFilter(category,absoluteAdapterPosition)
 
             }
         }

@@ -17,25 +17,28 @@
         android:paddingEnd="11.5dp"
         android:text="1"
         android:textAppearance="@style/calendar_default_text_style"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:orientation="vertical"
         android:id="@+id/calendar_item_calendo_mode_constraint"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="2.5dp"
         android:layout_marginEnd="2.5dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="3dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toTopOf="@id/calendar_item_divide_view"
         app:layout_constraintTop_toBottomOf="@id/week_calendar_day_text">
 
         <TextView
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
+            android:drawablePadding="2dp"
+            android:drawableStart="@drawable/calendo_plan_small_icon"
             android:id="@+id/calendar_calendo_todo_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -49,10 +52,14 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:paddingStart="3dp"
+            android:paddingEnd="3dp"
+            android:drawablePadding="2dp"
+            android:drawableStart="@drawable/calendo_plan_small_icon"
             android:id="@+id/calendar_calendo_plan_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="2dp"
+            android:layout_marginTop="1dp"
             app:layout_goneMarginTop="0dp"
             android:background="@drawable/calendar_item_count_text_plan_bg"
             android:gravity="center"

@@ -61,6 +61,7 @@ import com.garam.todolist.databinding.TodoItemRepeatSettingBottomSheetLayoutBind
 import com.garam.todolist.databinding.WeekCalendarItemLayoutBinding
 import com.garam.todolist.databinding.TodoRptDayChangeCalendarItemLayoutBinding
 import com.garam.todolist.databinding.TodoDeleteDialogLayoutBinding
+import com.garam.todolist.databinding.PlanDeleteDialogLayoutBinding
 import com.garam.todolist.todoList.TodoListViewModel
 import com.garam.todolist.ui.setting.SettingActivity
 import com.garam.todolist.ui.todoList.recyclerAdapter.SelectedCategoryTodoListRecyclerAdapter
@@ -72,6 +73,7 @@ import com.garam.todolist.util.clickListener.CategoryIconClickListener
 import com.garam.todolist.util.clickListener.MonthlyRptDayClickListener
 import com.garam.todolist.util.clickListener.PlanItemClickListener
 import com.garam.todolist.util.clickListener.TodoClickListener
+import com.garam.todolist.util.functions.addUntilToRRule
 import com.garam.todolist.util.functions.colorStringToColor
 import com.garam.todolist.util.functions.dateToString
 import com.garam.todolist.util.functions.filterTodosByDate
@@ -103,6 +105,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -123,6 +126,7 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
     private lateinit var planRecyclerAdapter: PlanListRecyclerAdapter
     private lateinit var todoInGoalRecyclerAdapter: TodoListInGoalRecyclerAdapter
     private lateinit var selectedCategoryTodoListAdapter : SelectedCategoryTodoListRecyclerAdapter
+    private lateinit var caetgoryHorizonAdapter : TodoListCategoryHorizonRecyclerAdapter
 
     private lateinit var todoDailyRptStartDate: LocalDate
     var selectedImageView: ImageView? = null
@@ -192,7 +196,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 viewModel.updateTodo(editTodo)
             }
         }
+
         categoryRecyclerAdapter.notifyItemChanged(position)
+        selectedCategoryTodoListAdapter.notifyItemChanged(position)
 
     }
 
@@ -385,9 +391,15 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         }
 
         binding.todoCategoryAllBtn.setOnClickListener {
+            it.alpha = 1f
+
+            caetgoryHorizonAdapter.currentPosition = -1
+            caetgoryHorizonAdapter.notifyDataSetChanged()
             binding.todoListWeekGoalTitleConstraint.visibility = View.VISIBLE
-            binding.selectedCategoryTodoListRecyclerView.visibility = View.GONE
+            binding.selectedCategoryTodoListConstraint.visibility = View.GONE
             binding.todoListRecyclerView.visibility = View.VISIBLE
+
+            viewModel.currentSelectedCategory.value = null
 
             lifecycleScope.launch {
                 viewModel.categoryTodoMap.collectLatest {
@@ -399,6 +411,13 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
         binding.todoCategoryAddBtn.setOnClickListener {
             showCategoryAddDialog()
+        }
+
+        binding.selectedCategoryTodoAddBtn.setOnClickListener {
+
+            viewModel.addTodo(viewModel.selectedDate.value.toString(), viewModel.currentSelectedCategory.value!!.categoryId, "")
+
+
         }
 
         todoInGoalRecyclerAdapter =
@@ -416,15 +435,19 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 viewModel.isExpandTodoListInGoal.value = true
                 binding.todoListWeekGoalRecyclerView.visibility = View.VISIBLE
 
+                Log.e("gExpandCurrentGoal",viewModel.currentGoal.value?.title.toString())
+
                 setTodoInGoal().invokeOnCompletion {
                     lifecycleScope.launch {
                         viewModel.currentTodoInGoal.collectLatest {
-                            todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
-                                this@TodoListActivity,
-                                viewModel.selectedDate.value.toString()
-                            )
-                            binding.todoListWeekGoalRecyclerView.adapter = todoInGoalRecyclerAdapter
-                            todoInGoalRecyclerAdapter.submitList(it)
+//                            todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
+//                                this@TodoListActivity,
+//                                viewModel.selectedDate.value.toString()
+//                            )
+//                            binding.todoListWeekGoalRecyclerView.adapter = todoInGoalRecyclerAdapter
+
+                            if(it.isNotEmpty() && it.first().categoryId == viewModel.currentGoal.value?.goalId.toString()) todoInGoalRecyclerAdapter.submitList(it)
+                            else todoInGoalRecyclerAdapter.submitList(emptyList())
 
                         }
                     }
@@ -442,6 +465,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
         binding.weekGoalAddBtn.setOnClickListener {
 
+            Log.e("currentGoal",viewModel.currentGoal.value.toString())
+
             if (viewModel.currentGoal.value == null) {
 
                 var (startDate, endDate) = if (viewModel.isWeekMode.value == true) getWeekStartEnd(
@@ -452,7 +477,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 val goal = Goal(
                     goalId = UUID.randomUUID().toString(),
                     title = "",
-                    startDate = startDate, endDate = endDate, type = GoalType.WEEKLY
+                    startDate = startDate, endDate = endDate, type = if (viewModel.isWeekMode.value == true) GoalType.WEEKLY
+                    else GoalType.MONTHLY
                 )
 
                 viewModel.addGoal(goal).invokeOnCompletion {
@@ -1010,13 +1036,13 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
         planAddDialogView.planDeleteBtn.setOnClickListener {
 
-            viewModel.deleteTodo(todo?.id.toString()).invokeOnCompletion {
+            if(todo?.repeatRule == null) viewModel.deleteTodo(todo?.id.toString()).invokeOnCompletion {
 
                 if (it is CancellationException) {
 
                 } else bottomSheetDialog.dismiss()
-
             }
+            else planDeleteDialog(todo?.id.toString(), bottomSheetDialog)
 
         }
 
@@ -1246,8 +1272,15 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
                     if (it is CancellationException)
                     else {
+                        if(todo.categoryId == viewModel.currentGoal.value?.goalId.toString()) {
+
+                            Log.e("goalTodoDelete",viewModel.currentTodoInGoal.value.toString())
+//                            todoInGoalRecyclerAdapter.notifyDataSetChanged()
+                        }
+                        
                         dialog.dismiss()
                         bottomSheetDialog.dismiss()
+                        
 
 
                     }
@@ -1278,10 +1311,18 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         }
 
         todoEditBottomSheetView.todoRepeatEndDateBtn.setOnClickListener {
-            viewModel.updateTodo(todo.copy(endDate = viewModel.selectedDate.value.toString()))
+
+            val editTodo = todo.copy(repeatRule = addUntilToRRule(todo.repeatRule.toString(), viewModel.selectedDate.value.toString()))
+
+            viewModel.updateTodo(editTodo)
                 .invokeOnCompletion {
                     bottomSheetDialog.dismiss()
                 }
+
+//            viewModel.updateTodo(todo.copy(endDate = viewModel.selectedDate.value.toString()))
+//                .invokeOnCompletion {
+//                    bottomSheetDialog.dismiss()
+//                }
 
         }
 
@@ -1291,6 +1332,36 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         }
 
         bottomSheetDialog.show()
+
+    }
+
+    private fun planDeleteDialog(planId : String, bottomSheetDialog: BottomSheetDialog) {
+
+
+        val dialogView = PlanDeleteDialogLayoutBinding.inflate(layoutInflater)
+        val dialog = AlertDialog.Builder(this, R.style.DialogTransparentTheme).setView(dialogView.root)
+                .create()
+
+        dialogView.planDeleteCancelBtn.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogView.planDeleteBtn.setOnClickListener {
+            viewModel.deleteTodo(planId).invokeOnCompletion {
+
+                if (it is CancellationException) {
+
+                } else {
+                    dialog.dismiss()
+                    bottomSheetDialog.dismiss()
+                }
+            }
+
+
+        }
+
+
+        dialog.show()
 
     }
 
@@ -1569,10 +1640,14 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         todoRepeatDialogView.repeatDailySettingLayout.todayStartBtn.isSelected = true
 
 
-        var repeatType = "DAILY"
+        var repeatType = if(todo.repeatRule == null) "DAILY"
+        else parseRRule(todo.repeatRule)["FREQ"]
+
         var dailyRepeatRule = generateRepeatRule("DAILY")
-        var weeklyRepeatRule = ""
-        var monthlyRepeatRule = ""
+        var weeklyRepeatRule = if(repeatType == "WEEKLY") parseRRule(todo.repeatRule.toString())["BYDAY"]
+        else ""
+        var monthlyRepeatRule = if(repeatType == "MONTHLY") parseRRule(todo.repeatRule.toString())["BYMONTHDAY"]
+        else ""
 
         val monthlyRptSelectedDates = mutableListOf<Int>()
 
@@ -1818,7 +1893,25 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         )
 
         val selectedDays = mutableSetOf<TextView>()
-        val selectedDaysOfWeek = mutableListOf<String>()
+        val selectedDaysOfWeek = if(todo.repeatRule == null) mutableListOf<String>()
+        else parseRRule(todo.repeatRule)["BYDAY"]?.split(",")?.toMutableList() ?: mutableListOf<String>()
+
+        selectedDaysOfWeek.forEach {
+            when(it) {
+                "MO" -> selectedDays.add(todoRepeatDialogView.repeatWeeklySettingLayout.repeatMondayTextView)
+                "TU" -> selectedDays.add(todoRepeatDialogView.repeatWeeklySettingLayout.repeatTuesdayTextView)
+                "WE" -> selectedDays.add(todoRepeatDialogView.repeatWeeklySettingLayout.repeatWednesdayTextView)
+                "TH" -> selectedDays.add(todoRepeatDialogView.repeatWeeklySettingLayout.repeatThursdayTextView)
+                "FR" -> selectedDays.add(todoRepeatDialogView.repeatWeeklySettingLayout.repeatFridayTextView)
+                "SA" -> selectedDays.add(todoRepeatDialogView.repeatWeeklySettingLayout.repeatSaturdayTextView)
+                "SU" -> selectedDays.add(todoRepeatDialogView.repeatWeeklySettingLayout.repeatSundayTextView)
+                else -> selectedDays.add(todoRepeatDialogView.repeatWeeklySettingLayout.repeatMondayTextView)
+            }
+
+
+        }
+
+        Log.e("selectedDaysOfWeek", selectedDaysOfWeek.toString())
 
         dayMap.forEach { (tv, code) ->
             tv.setOnClickListener {
@@ -1836,10 +1929,11 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                         this,
                         R.drawable.todo_rpt_day_change_calendar_item_pressed_bg
                     )
-                    selectedDays.add(tv)
+                    if(!selectedDays.contains(tv)) selectedDays.add(tv)
                 }
 
                 // 선택된 요일 문자열 리스트 추출
+                selectedDaysOfWeek.clear()
                 selectedDaysOfWeek.addAll(selectedDays.mapNotNull { dayMap[it] })
 
                 // generateRepeatRule 호출
@@ -2101,20 +2195,33 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
     private fun initCategoryHorizonRecyclerView() {
 
-        val adapter = TodoListCategoryHorizonRecyclerAdapter(object : CategoryFilterClickListener {
-            override fun categoryFilter(category: Category) {
+        caetgoryHorizonAdapter = TodoListCategoryHorizonRecyclerAdapter(object : CategoryFilterClickListener {
+            override fun categoryFilter(category: Category, position: Int) {
                 // 카테고리 필터
 
-                binding.selectedCategoryTodoListRecyclerView.visibility = View.VISIBLE
+                binding.todoCategoryAllBtn.alpha = 0.4f
+                binding.selectedCategoryTodoListConstraint.visibility = View.VISIBLE
                 binding.todoListRecyclerView.visibility = View.GONE
+
+                viewModel.currentSelectedCategory.value = category
 //                binding.planConstraint.visibility = View.GONE
 
+//                if(caetgoryHorizonAdapter.currentList.size == 1) caetgoryHorizonAdapter.notifyItemChanged(0)
+//                else if(position != 0) caetgoryHorizonAdapter.notifyItemRangeChanged(0, position - 1)
+//                else caetgoryHorizonAdapter.notifyItemRangeChanged(1, caetgoryHorizonAdapter.currentList.lastIndex-1)
+
                 lifecycleScope.launch {
-                    viewModel.categoryTodoMap.collectLatest {
-                        viewModel.selectedCategoryTodoList.value = it.filter { it.category == category }[0].todoList.toMutableList()
+                    viewModel.categoryTodoMap.collectLatest { categoryTodoMap ->
+//                        viewModel.selectedCategoryTodoList.value = it.filter { it.category == category }[0].todoList.toMutableList()
+
+                        viewModel.selectedCategoryTodoList.update {
+
+                            categoryTodoMap.filter { it.category == category }[0].todoList.toMutableList()
+
+                        }
                         initSelectedCategoryTodoRecyclerView(category, LocalDate.parse(viewModel.selectedDate.value.toString()))
 
-                        categoryRecyclerAdapter.submitList(it.filter { it.category == category }) {
+                        categoryRecyclerAdapter.submitList(categoryTodoMap.filter { it.category == category }) {
 //                            binding.todoListWeekGoalTitleConstraint.visibility = View.GONE
 
                         }
@@ -2122,11 +2229,11 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 }
             }
         })
-        binding.todoCategoryRecyclerView.adapter = adapter
+        binding.todoCategoryRecyclerView.adapter = caetgoryHorizonAdapter
 
         lifecycleScope.launch {
             viewModel.categoryList.collectLatest {
-                adapter.submitList(it)
+                caetgoryHorizonAdapter.submitList(it)
             }
         }
     }
@@ -2179,16 +2286,39 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
     private fun initSelectedCategoryTodoRecyclerView(category : Category?, selectedDate : LocalDate) {
 
-        selectedCategoryTodoListAdapter = SelectedCategoryTodoListRecyclerAdapter(this)
+        selectedCategoryTodoListAdapter = SelectedCategoryTodoListRecyclerAdapter(this, selectedDate.toString())
         binding.selectedCategoryTodoListRecyclerView.adapter = selectedCategoryTodoListAdapter
-//        selectedCategoryTodoListAdapter.submitList(todoList)
         lifecycleScope.launch {
             viewModel.categoryTodoMap.collectLatest { it ->
                 val list = if(category != null) filterTodosByDate(it.filter { it.category == category }[0].todoList.toMutableList(), LocalDate.parse(viewModel.selectedDate.value.toString()))
                 else filterTodosByDate(viewModel.selectedCategoryTodoList.value, selectedDate)
 
-                selectedCategoryTodoListAdapter.submitList(list)
+                selectedCategoryTodoListAdapter.submitList(list.sortedByDescending {
+                    val priorityRank = if (it.priority == true) 1L else 0L
 
+                    val sortRank = when(viewModel.sortModeFlow.value) {
+                        "Saved" -> {
+                            it.savedTime.toInstant().epochSecond
+                        }
+                        "Completed_Reversed" -> {
+                            val isCompleted = it.status?.values?.contains(TodoStatus.COMPLETED) == true
+                            val completedRank = if (isCompleted) 0 else 1
+                            completedRank * 1_000_000_000L + it.savedTime.toInstant().epochSecond
+                        }
+                        "Completed" -> {
+                            val isCompleted = it.status?.values?.contains(TodoStatus.COMPLETED) == true
+                            val completedRank = if (isCompleted) 1 else 0
+                            completedRank * 1_000_000_000L + it.savedTime.toInstant().epochSecond
+                        }
+                        else -> {
+                            it.savedTime.toInstant().epochSecond
+
+                        }
+                    }
+
+                    priorityRank * 1_000_000_000_000_000_000 + sortRank
+                }
+                )
             }
         }
 
@@ -2275,7 +2405,7 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             if (viewModel.isWeekMode.value == true) viewModel.getGoal(startDate, endDate)
                 .invokeOnCompletion {
-
+                    Log.e("wScrollCurrentGoal",viewModel.currentGoal.value?.title.toString())
 //                if(viewModel.currentGoal.value == null) {
 //
 //                    viewModel.currentTodoInGoal.value = emptyList<Todo>()
@@ -2283,27 +2413,30 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 //
 //                }
 //                else
-                    setTodoInGoal().invokeOnCompletion {
-
-                        lifecycleScope.launch {
-                            viewModel.currentTodoInGoal.collectLatest {
-                                todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
-                                    this@TodoListActivity,
-                                    viewModel.selectedDate.value.toString()
-                                )
-                                binding.todoListWeekGoalRecyclerView.adapter =
-                                    todoInGoalRecyclerAdapter
-
-                                if (it.isNotEmpty()) todoInGoalRecyclerAdapter.submitList(it)
-                                else {
-                                    viewModel.currentTodoInGoal.value = emptyList<Todo>()
-                                    todoInGoalRecyclerAdapter.submitList(viewModel.currentTodoInGoal.value)
-                                }
-
-                            }
-                        }
-
-                    }
+                    setTodoInGoal()
+//                        .invokeOnCompletion {
+//
+//                        lifecycleScope.launch {
+//                            viewModel.currentTodoInGoal.collectLatest {
+////`                                todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
+////                                    this@TodoListActivity,
+////                                    viewModel.selectedDate.value.toString()
+////                                )
+////                                binding.todoListWeekGoalRecyclerView.adapter =
+////                                    todoInGoalRecyclerAdapter`
+//
+//                                if (it.isNotEmpty()) {
+////                                    todoInGoalRecyclerAdapter.submitList(it)
+//                                }
+//                                else {
+////                                    viewModel.currentTodoInGoal.value = emptyList<Todo>()
+////                                    todoInGoalRecyclerAdapter.submitList(viewModel.currentTodoInGoal.value)
+//                                }
+//
+//                            }
+//                        }
+//
+//                    }
 
                 }
         }
@@ -2407,33 +2540,37 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
             if (viewModel.isWeekMode.value == false) viewModel.getGoal(startDate, endDate)
                 .invokeOnCompletion {
 
+                    Log.e("mScrollCurrentGoal",viewModel.currentGoal.value?.title.toString())
 //                if (viewModel.currentGoal.value == null) {
 //
 //                    viewModel.currentTodoInGoal.value = emptyList<Todo>()
 //                    todoInGoalRecyclerAdapter.submitList(viewModel.currentTodoInGoal.value)
 //
 //                } else
-                    setTodoInGoal().invokeOnCompletion {
-
-                        lifecycleScope.launch {
-                            viewModel.currentTodoInGoal.collectLatest {
-                                todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
-                                    this@TodoListActivity,
-                                    viewModel.selectedDate.value.toString()
-                                )
-                                binding.todoListWeekGoalRecyclerView.adapter =
-                                    todoInGoalRecyclerAdapter
-
-                                if (it.isNotEmpty()) todoInGoalRecyclerAdapter.submitList(it)
-                                else {
-
-                                    viewModel.currentTodoInGoal.value = emptyList<Todo>()
-                                    todoInGoalRecyclerAdapter.submitList(viewModel.currentTodoInGoal.value)
-                                }
-                            }
-                        }
-
-                    }
+                    setTodoInGoal()
+//                        .invokeOnCompletion {
+//
+//                        lifecycleScope.launch {
+//                            viewModel.currentTodoInGoal.collectLatest {
+////                                todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
+////                                    this@TodoListActivity,
+////                                    viewModel.selectedDate.value.toString()
+////                                )
+////                                binding.todoListWeekGoalRecyclerView.adapter =
+////                                    todoInGoalRecyclerAdapter
+//
+//                                if (it.isNotEmpty()) {
+////                                    todoInGoalRecyclerAdapter.submitList(it)
+//                                }
+//                                else {
+//
+////                                    viewModel.currentTodoInGoal.value = emptyList<Todo>()
+////                                    todoInGoalRecyclerAdapter.submitList(viewModel.currentTodoInGoal.value)
+//                                }
+//                            }
+//                        }
+//
+//                    }
                 }
 
 //            viewModel.currentMonthString.value = monthToString(it.yearMonth)
@@ -2970,13 +3107,27 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
 
         if (toWeekMode) {
-//            val selectedDate = binding.weekCalendarView.findFirstVisibleWeek()?.days[0]!!.date
 
             val (startDate, endDate) = getWeekStartEnd(viewModel.selectedDate.value.toString())
             viewModel.getGoal(startDate, endDate).invokeOnCompletion {
 
-                Log.e("mode", "week")
-                Log.e("goal", viewModel.currentGoal.value.toString())
+                Log.e("tcmCurrentGoal1",viewModel.currentGoal.value?.title.toString())
+
+                setTodoInGoal()
+//                    .invokeOnCompletion {
+//                    lifecycleScope.launch {
+//                        viewModel.currentTodoInGoal.collectLatest {
+////                            todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
+////                                this@TodoListActivity,
+////                                viewModel.selectedDate.value.toString()
+////                            )
+////                            binding.todoListWeekGoalRecyclerView.adapter = todoInGoalRecyclerAdapter
+//
+////                            todoInGoalRecyclerAdapter.submitList(it)
+//
+//                        }
+//                    }
+//                }
             }
         } else {
             val selectedDate = viewModel.currentMonth.value.atDay(1)
@@ -2992,8 +3143,23 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
                     else -> {
 
-                        Log.e("mode", "month")
-                        Log.e("goal", viewModel.currentGoal.value.toString())
+                        Log.e("tcmCurrentGoal2",viewModel.currentGoal.value?.title.toString())
+
+                        setTodoInGoal()
+//                            .invokeOnCompletion {
+//                            lifecycleScope.launch {
+//                                viewModel.currentTodoInGoal.collectLatest {
+////                                    todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
+////                                        this@TodoListActivity,
+////                                        viewModel.selectedDate.value.toString()
+////                                    )
+////                                    binding.todoListWeekGoalRecyclerView.adapter = todoInGoalRecyclerAdapter
+//
+////                                    todoInGoalRecyclerAdapter.submitList(it)
+//
+//                                }
+//                            }
+//                        }
                     }
                 }
 
@@ -3150,6 +3316,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
     private fun addTodoInGoal() {
         viewModel.currentGoal.value?.let {
 
+            Log.e("currentGoal",it.goalId)
+            Log.e("currentGoal",it.title)
+
             val startDate = it.startDate
             val endDate = it.endDate
             val goalId = it.goalId
@@ -3159,12 +3328,13 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 lifecycleScope.launch {
 
                     viewModel.currentTodoInGoal.collectLatest {
-                        todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
-                            this@TodoListActivity,
-                            viewModel.selectedDate.value.toString()
-                        )
-                        binding.todoListWeekGoalRecyclerView.adapter = todoInGoalRecyclerAdapter
-                        todoInGoalRecyclerAdapter.submitList(it)
+//                        todoInGoalRecyclerAdapter = TodoListInGoalRecyclerAdapter(
+//                            this@TodoListActivity,
+//                            viewModel.selectedDate.value.toString()
+//                        )
+//                        binding.todoListWeekGoalRecyclerView.adapter = todoInGoalRecyclerAdapter
+
+//                        todoInGoalRecyclerAdapter.submitList(it)
                     }
                 }
             }

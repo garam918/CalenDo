@@ -4,5 +4,5 @@ import com.garam.todolist.data.Category
 
 interface CategoryFilterClickListener {
 
-    fun categoryFilter(category: Category)
+    fun categoryFilter(category: Category, position: Int)
 }

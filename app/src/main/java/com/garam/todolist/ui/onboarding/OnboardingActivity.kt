@@ -21,6 +21,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.viewpager2.widget.ViewPager2
 import com.garam.todolist.R
+import com.garam.todolist.data.Category
+import com.garam.todolist.data.CategoryIconType
+import com.garam.todolist.data.Todo
+import com.garam.todolist.data.TodoStatus
 import com.garam.todolist.data.UserData
 import com.garam.todolist.databinding.ActivityOnboardingBinding
 import com.garam.todolist.databinding.OnboardingLoginBottomSheetDialogLayoutBinding
@@ -28,10 +32,14 @@ import com.garam.todolist.ui.todoList.TodoListActivity
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.time.LocalDate
+import java.util.Date
+import java.util.UUID
 
 
 @AndroidEntryPoint
@@ -187,11 +195,82 @@ class OnboardingActivity : AppCompatActivity() {
                                     loginType = "Google"
                                 )
 
+                                val category = Category(
+                                    categoryId = UUID.randomUUID().toString(),
+                                    title = "카테고리",
+                                    index = 0,
+                                    icon = CategoryIconType.HOME,
+                                    color = "default_color_1"
+                                )
+
+                                val tutorialTodoList = listOf(
+                                    Todo(
+                                        id = "pre_todo_1",
+                                        title = "",
+                                        categoryId = category.categoryId,
+                                        startDate = LocalDate.now().toString(),
+                                        endDate = LocalDate.now().toString(),
+                                        repeatRule = null,
+                                        status = mutableMapOf(LocalDate.now().toString() to TodoStatus.NONE),
+                                        priority = false,
+                                        memo = "",
+                                        icon = null,
+                                        color = null,
+                                        startTime = null,
+                                        index = null,
+                                        savedTime = Timestamp.now()
+                                    ),
+                                    Todo(
+                                        id = "pre_todo_2",
+                                        title = "",
+                                        categoryId = category.categoryId,
+                                        startDate = LocalDate.now().toString(),
+                                        endDate = LocalDate.now().toString(),
+                                        repeatRule = null,
+                                        status = mutableMapOf(LocalDate.now().toString() to TodoStatus.NONE),
+                                        priority = false,
+                                        memo = "",
+                                        icon = null,
+                                        color = null,
+                                        startTime = null,
+                                        index = null,
+                                        savedTime = Timestamp(Date(Timestamp.now().toDate().time + 10))
+                                    ),
+                                    Todo(
+                                        id = "pre_todo_3",
+                                        title = "",
+                                        categoryId = category.categoryId,
+                                        startDate = LocalDate.now().toString(),
+                                        endDate = LocalDate.now().toString(),
+                                        repeatRule = null,
+                                        status = mutableMapOf(LocalDate.now().toString() to TodoStatus.COMPLETED),
+                                        priority = false,
+                                        memo = "",
+                                        icon = null,
+                                        color = null,
+                                        startTime = null,
+                                        index = null,
+                                        savedTime = Timestamp(Date(Timestamp.now().toDate().time + 20))
+                                    )
+                                )
+
                                 lifecycleScope.launch {
-                                    viewModel.setUserData(userData).invokeOnCompletion {
-                                        launchTodoActivity()
+                                    viewModel.saveTutorialTodo(
+                                        category,
+                                        tutorialTodoList,
+                                        user.uid.toString()
+                                    ).invokeOnCompletion {
+                                        viewModel.setUserData(userData).invokeOnCompletion {
+                                            launchTodoActivity()
+                                        }
                                     }
                                 }
+
+//                                lifecycleScope.launch {
+//                                    viewModel.setUserData(userData).invokeOnCompletion {
+//                                        launchTodoActivity()
+//                                    }
+//                                }
                             }
 
                         }
@@ -217,9 +296,73 @@ class OnboardingActivity : AppCompatActivity() {
                     UserData(uid = user.uid.toString(), email = "Guest", loginType = "Anonymous")
 
                 lifecycleScope.launch {
-                    viewModel.setUserData(userData).invokeOnCompletion {
-                        launchTodoActivity()
+
+                    val category = Category(
+                        categoryId = UUID.randomUUID().toString(),
+                        title = "카테고리",
+                        index = 0,
+                        icon = CategoryIconType.HOME,
+                        color = "default_color_1"
+                    )
+
+                    val tutorialTodoList = listOf(
+                        Todo(
+                            id = "pre_todo_1",
+                            title = "",
+                            categoryId = category.categoryId,
+                            startDate = LocalDate.now().toString(),
+                            endDate = LocalDate.now().toString(),
+                            repeatRule = null,
+                            status = mutableMapOf(LocalDate.now().toString() to TodoStatus.NONE),
+                            priority = false,
+                            memo = "",
+                            icon = null,
+                            color = null,
+                            startTime = null,
+                            index = null,
+                            savedTime = Timestamp.now()
+                        ),
+                        Todo(
+                            id = "pre_todo_2",
+                            title = "",
+                            categoryId = category.categoryId,
+                            startDate = LocalDate.now().toString(),
+                            endDate = LocalDate.now().toString(),
+                            repeatRule = null,
+                            status = mutableMapOf(LocalDate.now().toString() to TodoStatus.NONE),
+                            priority = false,
+                            memo = "",
+                            icon = null,
+                            color = null,
+                            startTime = null,
+                            index = null,
+                            savedTime = Timestamp(Date(Timestamp.now().toDate().time + 10))
+                        ),
+                        Todo(
+                            id = "pre_todo_3",
+                            title = "",
+                            categoryId = category.categoryId,
+                            startDate = LocalDate.now().toString(),
+                            endDate = LocalDate.now().toString(),
+                            repeatRule = null,
+                            status = mutableMapOf(LocalDate.now().toString() to TodoStatus.COMPLETED),
+                            priority = false,
+                            memo = "",
+                            icon = null,
+                            color = null,
+                            startTime = null,
+                            index = null,
+                            savedTime = Timestamp(Date(Timestamp.now().toDate().time + 20))
+                        )
+                    )
+
+                    viewModel.saveTutorialTodo(category, tutorialTodoList,user.uid.toString()).invokeOnCompletion {
+                        viewModel.setUserData(userData).invokeOnCompletion {
+                            launchTodoActivity()
+                        }
                     }
+
+
                 }
             } else {
 
