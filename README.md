@@ -44,3 +44,8 @@
  2) 소셜 로그인
     - 네이버, 카카오 로그인 추가 예정
 
+---
+
+## 플레이스토어
+
+https://play.google.com/store/apps/details?id=com.garam.todolist&hl=ko
