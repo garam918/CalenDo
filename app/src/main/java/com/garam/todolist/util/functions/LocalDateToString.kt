@@ -12,3 +12,5 @@ fun monthToString(month: YearMonth) = month.format(DateTimeFormatter.ofPattern("
 fun localDateToDateString(date: LocalDate) = date.format(DateTimeFormatter.ofPattern("yyyy년 M월 d일 EEE", Locale.KOREAN))
 
 fun localDateToDateStringForDialog(date: LocalDate) = date.format(DateTimeFormatter.ofPattern("M월 d일", Locale.KOREAN))
+
+fun localDateToWidgetDateString(date: LocalDate) = date.format(DateTimeFormatter.ofPattern("M월 d일 EEE", Locale.KOREAN))
