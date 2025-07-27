@@ -7,6 +7,7 @@ plugins {
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
     id("androidx.room")
+    id("kotlin-parcelize")
 }
 
 
@@ -18,8 +19,8 @@ android {
         applicationId = "com.garam.todolist"
         minSdk = 30
         targetSdk = 35
-        versionCode = 14
-        versionName = "1.0.0"
+        versionCode = 16
+        versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }

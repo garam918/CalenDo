@@ -64,7 +64,6 @@
     </style>
 
 
-
     <style name="todo_mode_text_style" parent="paperlogy_bold_text_style">
         <item name="android:textColor">@color/todo_mode_text_color</item>
         <item name="android:textSize">19sp</item>
@@ -361,7 +360,6 @@
     </style>
 
 
-
     <style name="setting_account_text_style" parent="spoqa_regular_text_style">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/color_gray40</item>
@@ -398,7 +396,6 @@
     </style>
 
 
-
     <style name="setting_screen_custom_dialog_title_text_style" parent="spoqa_bold_text_style">
         <item name="android:textSize">13sp</item>
         <item name="android:textColor">@color/color_gray100</item>
@@ -410,11 +407,47 @@
     </style>
 
 
-
     <style name="setting_version_text_style" parent="spoqa_regular_text_style">
         <item name="android:textSize">12sp</item>
         <item name="android:textColor">@color/color_gray40</item>
     </style>
 
+    <style name="Widget.TodoList.AppWidget.Container" parent="android:Widget">
+        <item name="android:id">@android:id/background</item>
+        <item name="android:background">?android:attr/colorBackground</item>
+    </style>
+
+    <style name="Widget.TodoList.AppWidget.InnerView" parent="android:Widget">
+        <item name="android:background">?android:attr/colorBackground</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+    </style>
+
+    <style name="widget_date_text_style" parent="spoqa_medium_text_style">
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+
+    </style>
+
+    <style name="widget_todo_plan_text_style" parent="spoqa_medium_text_style">
+
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/color_gray60</item>
+
+    </style>
+
+    <style name="widget_todo_plan_title_text_style" parent="spoqa_regular_text_style">
+
+        <item name="android:textSize">15sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+
+    </style>
+
+    <style name="widget_plan_time_text_style" parent="spoqa_regular_text_style">
+
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+
+    </style>
 
 </resources>

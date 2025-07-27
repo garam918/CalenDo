@@ -6,5 +6,8 @@
     <string name="terms_of_use_string">https://www.termsfeed.com/live/743c79b3-cb46-4843-8293-83ed1f4f77fd</string>
     <string name="privacy_policy_string">https://www.privacypolicies.com/live/dbb29b1d-5325-48cd-8a66-e79273f79b05</string>
     <string name="calendo_feedback_link_string">https://docs.google.com/forms/d/1kSKdNMfWOiWGyBpEFmFlyGFgVP9aiN_yK3gPSQEYdNg/edit</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
 
 </resources>

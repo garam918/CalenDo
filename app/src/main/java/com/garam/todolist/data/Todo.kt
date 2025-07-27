@@ -1,9 +1,12 @@
 package com.garam.todolist.data
 
+import android.os.Parcelable
 import com.google.firebase.Timestamp
+import kotlinx.parcelize.Parcelize
 
 // 아이콘, 색상, 시작시간, 인덱스 추가 해야 함
 // 카테고리 아이디 유무로 할일, 일정 구분
+@Parcelize
 data class Todo(
     val id : String,
     val categoryId : String?,
@@ -19,7 +22,7 @@ data class Todo(
     val startTime : String?,
     val index : Int?,
     val savedTime : Timestamp
-)
+) : Parcelable
 
 enum class TodoStatus {
     NONE,       // 체크 해제 상태

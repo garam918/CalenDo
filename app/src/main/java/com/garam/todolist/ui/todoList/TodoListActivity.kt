@@ -92,6 +92,7 @@ import com.garam.todolist.util.functions.monthToDateList
 import com.garam.todolist.util.functions.monthToString
 import com.garam.todolist.util.functions.parseRRule
 import com.garam.todolist.util.functions.preventKeyboardFromShowing
+import com.garam.todolist.util.functions.showCustomSnackbar
 import com.garam.todolist.util.functions.showKeyboard
 import com.garam.todolist.util.functions.timePickerToString
 import com.garam.todolist.util.functions.toICalDay
@@ -1280,8 +1281,12 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                         
                         dialog.dismiss()
                         bottomSheetDialog.dismiss()
-                        
 
+                        showCustomSnackbar(binding.main, "${todo.title}가 삭제되었습니다.") {
+
+                            Log.e("삭제된 아이템",todo.title)
+
+                        }
 
                     }
                 }
