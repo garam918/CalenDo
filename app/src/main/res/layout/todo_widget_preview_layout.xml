@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="@drawable/widget_background"
+    android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:textAppearance="@style/widget_date_text_style"
+        android:text="7월 13일 일"
+        android:id="@+id/widget_preview_date_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textAppearance="@style/widget_todo_plan_text_style"
+        android:text="일정"
+        android:id="@+id/widget_preview_todo_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="5dp"
+        android:id="@+id/widget_preview_todo_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <CheckBox
+            android:button="@drawable/todo_status_completed_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"/>
+
+        <TextView
+            android:layout_marginStart="10dp"
+            android:textAppearance="@style/widget_todo_plan_title_text_style"
+            android:text="비타민 구매하기"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+    <TextView
+        android:text=""
+        android:alpha="0.1"
+        android:background="@color/color_gray100"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"/>
+
+    <TextView
+
+        android:textAppearance="@style/widget_todo_plan_text_style"
+        android:text="일정"
+        android:id="@+id/widget_preview_plan_title_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_marginTop="6dp"
+        android:id="@+id/widget_preview_plan_linear"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:padding="2dp"
+            android:layout_gravity="center"
+            android:background="@drawable/todo_item_icon_bg"
+            android:src="@drawable/todo_icon_cafe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_gravity="center"
+            android:textAppearance="@style/widget_todo_plan_title_text_style"
+            android:layout_weight="1"
+            android:layout_marginStart="10dp"
+            android:text="개발자 미팅"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:alpha="0.5"
+            android:textAppearance="@style/widget_plan_time_text_style"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:text="오전 11:30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+</LinearLayout>
