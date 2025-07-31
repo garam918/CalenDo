@@ -47,10 +47,7 @@ class TodoListWidgetProvider: AppWidgetProvider() {
             || intent?.action == AppWidgetManager.ACTION_APPWIDGET_OPTIONS_CHANGED
             || intent?.action == ACTION_REFRESH) {
 
-            val views = RemoteViews(context.packageName, R.layout.todo_list_widget)
-            views.setTextViewText(R.id.widget_today_text, localDateToWidgetDateString(LocalDate.now()))
-
-            Log.e("action","widget_update")
+            mgr.notifyAppWidgetViewDataChanged(ids,R.id.widget_today_text)
             mgr.notifyAppWidgetViewDataChanged(ids, R.id.widget_todo_list_view)
         }
     }
@@ -64,8 +61,15 @@ class TodoListWidgetProvider: AppWidgetProvider() {
 
 
             val views = RemoteViews(context.packageName, R.layout.todo_list_widget)
-            views.setTextViewText(R.id.widget_today_text, localDateToWidgetDateString(LocalDate.now()))
+            val today = LocalDate.now()
+            views.setTextViewText(R.id.widget_today_text, localDateToWidgetDateString(today) + " 오늘")
             views.setRemoteAdapter(widgetId,R.id.widget_todo_list_view, intent)
+
+            val openIntent = Intent(context, TodoListActivity::class.java)
+            val openPendingIntent = PendingIntent.getActivity(
+                context, 0, openIntent, PendingIntent.FLAG_IMMUTABLE
+            )
+            views.setOnClickPendingIntent(R.id.widget_container, openPendingIntent)
 
             val refreshIntent = Intent(context, TodoListWidgetProvider::class.java).apply {
                 action = ACTION_REFRESH
@@ -75,12 +79,6 @@ class TodoListWidgetProvider: AppWidgetProvider() {
             )
             views.setOnClickPendingIntent(R.id.widget_refresh_btn, refreshPendingIntent)
 
-            val openIntent = Intent(context, TodoListActivity::class.java)
-            val openPendingIntent = PendingIntent.getActivity(
-                context, 0, openIntent, PendingIntent.FLAG_IMMUTABLE
-            )
-//            views.setOnClickPendingIntent(R.id.widget_container, openPendingIntent)
-
             val templateIntent = Intent(context, TodoListActivity::class.java)
             val pendingTemplate = PendingIntent.getActivity(
                 context, 0, templateIntent, PendingIntent.FLAG_IMMUTABLE
@@ -89,14 +87,5 @@ class TodoListWidgetProvider: AppWidgetProvider() {
 
             appWidgetManager.updateAppWidget(widgetId, views)
         }
-    }
-
-    fun isConnected(context: Context): Boolean {
-        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-
-        val network = connectivityManager.activeNetwork ?: return false
-        val capabilities = connectivityManager.getNetworkCapabilities(network) ?: return false
-
-        return capabilities.hasCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET)
     }
 }

@@ -85,6 +85,25 @@ class TodoListRemoteViewsFactory(private val context: Context) : RemoteViewsServ
                 RemoteViews(pkg, R.layout.widget_item_plan_layout).apply {
                     setTextViewText(R.id.widget_item_plan_title_text, item.plan.title)
                     setInt(R.id.widget_plan_title_img,"setColorFilter", colorStringToColor(item.plan.color.toString(),context))
+
+                    setInt(R.id.widget_plan_title_img,"setBackgroundResource",when(item.plan.color) {
+                        "default_color_1" -> R.drawable.widget_todo_item_icon_bg_1
+                        "default_color_2" -> R.drawable.widget_todo_item_icon_bg_2
+                        "default_color_3" -> R.drawable.widget_todo_item_icon_bg_3
+                        "default_color_4" -> R.drawable.widget_todo_item_icon_bg_4
+                        "default_color_5" -> R.drawable.widget_todo_item_icon_bg_5
+                        "default_color_6" -> R.drawable.widget_todo_item_icon_bg_6
+                        "default_color_7" -> R.drawable.widget_todo_item_icon_bg_7
+                        "default_color_8" -> R.drawable.widget_todo_item_icon_bg_8
+                        "default_color_9" -> R.drawable.widget_todo_item_icon_bg_9
+                        "default_color_10" -> R.drawable.widget_todo_item_icon_bg_10
+                        "default_color_11" -> R.drawable.widget_todo_item_icon_bg_11
+                        "default_color_12" -> R.drawable.widget_todo_item_icon_bg_12
+
+                        else -> R.drawable.widget_todo_item_icon_bg_1
+
+
+                    })
                     setImageViewResource(R.id.widget_plan_title_img, iconToDrawable(item.plan.icon!!))
                     setOnClickFillInIntent(R.id.widget_item_plan_linear, fillInIntent)
 
