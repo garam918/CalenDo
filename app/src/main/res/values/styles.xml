@@ -122,7 +122,7 @@
 
     <style name="goal_type_text_style" parent="spoqa_regular_text_style">
         <item name="android:textColor">@color/color_gray0</item>
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">9sp</item>
     </style>
 
     <style name="goal_title_text_style" parent="spoqa_medium_text_style">

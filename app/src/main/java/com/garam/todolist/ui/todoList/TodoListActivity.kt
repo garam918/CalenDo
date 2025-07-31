@@ -10,11 +10,9 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import android.view.GestureDetector
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.CompoundButton
 import android.widget.ImageView
@@ -41,8 +39,6 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.RecyclerView
 import com.garam.todolist.R
 import com.garam.todolist.data.Category
 import com.garam.todolist.data.CategoryIconType
@@ -97,14 +93,13 @@ import com.garam.todolist.util.functions.showKeyboard
 import com.garam.todolist.util.functions.timePickerToString
 import com.garam.todolist.util.functions.toICalDay
 import com.garam.todolist.util.setSingleOnClickListener
+import com.garam.todolist.widget.widgetUpdate
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kizitonwose.calendar.core.*
 import com.kizitonwose.calendar.view.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CancellationException
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
@@ -127,7 +122,7 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
     private lateinit var planRecyclerAdapter: PlanListRecyclerAdapter
     private lateinit var todoInGoalRecyclerAdapter: TodoListInGoalRecyclerAdapter
     private lateinit var selectedCategoryTodoListAdapter : SelectedCategoryTodoListRecyclerAdapter
-    private lateinit var caetgoryHorizonAdapter : TodoListCategoryHorizonRecyclerAdapter
+    private lateinit var categoryHorizonAdapter : TodoListCategoryHorizonRecyclerAdapter
 
     private lateinit var todoDailyRptStartDate: LocalDate
     var selectedImageView: ImageView? = null
@@ -198,6 +193,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
             }
         }
 
+        widgetUpdate(this)
+
         categoryRecyclerAdapter.notifyItemChanged(position)
         selectedCategoryTodoListAdapter.notifyItemChanged(position)
 
@@ -206,6 +203,7 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
     override fun todoTitleEditClick(todo: Todo) {
 
         viewModel.updateTodo(todo).invokeOnCompletion {
+            widgetUpdate(this)
             Log.e("todo.title", todo.title)
         }
 
@@ -214,6 +212,7 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
     override fun todoAdd(categoryId: String) {
 
         viewModel.addTodo(viewModel.selectedDate.value.toString(), categoryId, "")
+        widgetUpdate(this)
 
     }
 
@@ -394,8 +393,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         binding.todoCategoryAllBtn.setOnClickListener {
             it.alpha = 1f
 
-            caetgoryHorizonAdapter.currentPosition = -1
-            caetgoryHorizonAdapter.notifyDataSetChanged()
+            categoryHorizonAdapter.currentPosition = -1
+            categoryHorizonAdapter.notifyDataSetChanged()
             binding.todoListWeekGoalTitleConstraint.visibility = View.VISIBLE
             binding.selectedCategoryTodoListConstraint.visibility = View.GONE
             binding.todoListRecyclerView.visibility = View.VISIBLE
@@ -1014,6 +1013,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 repeatRule, color.toString(), editCategoryIconType, startTime
             ).invokeOnCompletion {
 
+                widgetUpdate(this)
+
                 if (it is CancellationException) {
 
                 } else bottomSheetDialog.dismiss()
@@ -1028,6 +1029,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                     startTime = startTime
                 )
             ).invokeOnCompletion {
+
+                widgetUpdate(this)
+
                 if (it is CancellationException) {
 
                 } else bottomSheetDialog.dismiss()
@@ -1038,6 +1042,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         planAddDialogView.planDeleteBtn.setOnClickListener {
 
             if(todo?.repeatRule == null) viewModel.deleteTodo(todo?.id.toString()).invokeOnCompletion {
+
+                widgetUpdate(this)
 
                 if (it is CancellationException) {
 
@@ -1217,6 +1223,23 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             viewModel.updateTodo(editTodo).invokeOnCompletion {
                 bottomSheetDialog.dismiss()
+
+                widgetUpdate(this)
+
+
+                showCustomSnackbar(binding.main, when(todoEditBottomSheetView.todoTodayTomorrowBtn.text) {
+                    "오늘 하기" -> "${editTodo.title}이(가) 오늘 할일로 변경되었습니다."
+                    "오늘도 하기" -> "${editTodo.title}이(가) 오늘 할일에 추가되었습니다."
+                    "내일 하기" -> "${editTodo.title}이(가) 내일 할일로 변경되었습니다."
+                    "내일도 하기" -> "${editTodo.title}이(가) 내일 할일에 추가되었습니다."
+                    else -> ""
+                }) {
+
+                    if(editTodo.id == todo.id) viewModel.updateTodo(todo)
+                    else viewModel.deleteTodo(editTodo.id)
+
+                    widgetUpdate(this)
+                }
             }
 
         }
@@ -1243,12 +1266,19 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
         todoEditBottomSheetView.todoPriorityBtn.setOnClickListener {
 
-            var editTodo: Todo = if (todo.priority) todo.copy(priority = false)
+            val editTodo: Todo = if (todo.priority) todo.copy(priority = false)
             else todo.copy(priority = true)
+
 
 
             viewModel.updateTodo(editTodo).invokeOnCompletion {
                 bottomSheetDialog.dismiss()
+
+                showCustomSnackbar(binding.main, "${editTodo.title}이(가) ${if(editTodo.priority) " 우선순위에 등록되었습니다." else " 우선순위에서 해제되었습니다."}") {
+
+                    viewModel.updateTodo(todo)
+
+                }
             }
         }
 
@@ -1271,21 +1301,23 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
             dialogView.todoDeleteBtn.setOnClickListener {
                 viewModel.deleteTodo(todo.id).invokeOnCompletion {
 
+                    widgetUpdate(this)
+
                     if (it is CancellationException)
                     else {
                         if(todo.categoryId == viewModel.currentGoal.value?.goalId.toString()) {
 
-                            Log.e("goalTodoDelete",viewModel.currentTodoInGoal.value.toString())
 //                            todoInGoalRecyclerAdapter.notifyDataSetChanged()
                         }
                         
                         dialog.dismiss()
                         bottomSheetDialog.dismiss()
 
-                        showCustomSnackbar(binding.main, "${todo.title}가 삭제되었습니다.") {
+                        showCustomSnackbar(binding.main, "${todo.title}이(가) 삭제되었습니다.") {
 
-                            Log.e("삭제된 아이템",todo.title)
+                            viewModel.updateTodo(todo)
 
+                            widgetUpdate(this)
                         }
 
                     }
@@ -1296,10 +1328,19 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
             if(todo.repeatRule == null) {
                 viewModel.deleteTodo(todo.id).invokeOnCompletion {
 
+                    widgetUpdate(this)
+
                     if (it is CancellationException)
                     else {
                         dialog.dismiss()
                         bottomSheetDialog.dismiss()
+
+                        showCustomSnackbar(binding.main, "${todo.title}이(가) 삭제되었습니다.") {
+
+                            viewModel.updateTodo(todo)
+
+                            widgetUpdate(this)
+                        }
 
 
                     }
@@ -1321,6 +1362,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             viewModel.updateTodo(editTodo)
                 .invokeOnCompletion {
+
+                    widgetUpdate(this)
+
                     bottomSheetDialog.dismiss()
                 }
 
@@ -1353,6 +1397,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
         dialogView.planDeleteBtn.setOnClickListener {
             viewModel.deleteTodo(planId).invokeOnCompletion {
+
+                widgetUpdate(this)
 
                 if (it is CancellationException) {
 
@@ -1788,7 +1834,7 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 textView.text =
                     daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.getDefault())
 
-                textView.setTextColor(R.color.white)
+                textView.setTextColor(ContextCompat.getColor(this,R.color.white))
             }
 
         todoRepeatDialogView.repeatDailySettingLayout.todoRptCalendarTitleContainer.root.getChildAt(
@@ -2125,6 +2171,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 // 메모 저장
 
                 viewModel.updateTodo(editTodo).invokeOnCompletion {
+                    widgetUpdate(this@TodoListActivity)
+
                     dialog.dismiss()
                 }
             }
@@ -2137,6 +2185,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 // 메모 저장
 
                 viewModel.updateTodo(editTodo).invokeOnCompletion {
+
+                    widgetUpdate(this@TodoListActivity)
+
                     dialog.dismiss()
                 }
 
@@ -2189,7 +2240,17 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             viewModel.updateTodo(editTodo).invokeOnCompletion {
 
+                widgetUpdate(this)
+
                 bottomSheetDialog.dismiss()
+
+                showCustomSnackbar(binding.main, "${editTodo.title}의 카테고리가 변경되었습니다.") {
+
+                    widgetUpdate(this)
+
+                    viewModel.updateTodo(todo)
+
+                }
 
             }
         }
@@ -2200,7 +2261,7 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
     private fun initCategoryHorizonRecyclerView() {
 
-        caetgoryHorizonAdapter = TodoListCategoryHorizonRecyclerAdapter(object : CategoryFilterClickListener {
+        categoryHorizonAdapter = TodoListCategoryHorizonRecyclerAdapter(object : CategoryFilterClickListener {
             override fun categoryFilter(category: Category, position: Int) {
                 // 카테고리 필터
 
@@ -2234,11 +2295,11 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 }
             }
         })
-        binding.todoCategoryRecyclerView.adapter = caetgoryHorizonAdapter
+        binding.todoCategoryRecyclerView.adapter = categoryHorizonAdapter
 
         lifecycleScope.launch {
             viewModel.categoryList.collectLatest {
-                caetgoryHorizonAdapter.submitList(it)
+                categoryHorizonAdapter.submitList(it)
             }
         }
     }
