@@ -84,8 +84,10 @@ object TodoBindingAdapter {
 
         val background = constraint.background
 
-        if(isWeekMode) background.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(constraint.context, R.color.main_color), PorterDuff.Mode.SRC_ATOP)
-        else background.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(constraint.context, R.color.goal_type_monthly_color), PorterDuff.Mode.SRC_ATOP)
+//        if(isWeekMode)
+
+        background.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(constraint.context, R.color.main_color), PorterDuff.Mode.SRC_ATOP)
+//        else background.colorFilter = PorterDuffColorFilter(ContextCompat.getColor(constraint.context, R.color.goal_type_monthly_color), PorterDuff.Mode.SRC_ATOP)
 
     }
 
@@ -93,8 +95,17 @@ object TodoBindingAdapter {
     @JvmStatic
     fun todoGoalTypeTitleText(textView: TextView, isWeekMode: Boolean) {
 
-        if(isWeekMode) textView.text = "이번주 목표"
-        else textView.text = "이번달 목표"
+        if(isWeekMode) textView.apply {
+            text = "주"
+            background = ContextCompat.getDrawable(textView.context,R.drawable.goal_week_icon)
+            setTextColor(ContextCompat.getColor(textView.context,R.color.main_color))
+        }
+        else textView.apply {
+
+            text = "월"
+            background = ContextCompat.getDrawable(textView.context,R.drawable.goal_month_icon)
+            setTextColor(ContextCompat.getColor(textView.context,R.color.white))
+        }
     }
 
     @BindingAdapter("set_goal_add_btn_count_text_visibility")

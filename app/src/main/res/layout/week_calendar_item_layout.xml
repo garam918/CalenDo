@@ -55,7 +55,7 @@
             android:paddingStart="3dp"
             android:paddingEnd="3dp"
             android:drawablePadding="2dp"
-            android:drawableStart="@drawable/calendo_plan_small_icon"
+            android:drawableStart="@drawable/calendo_todo_small_icon"
             android:id="@+id/calendar_calendo_plan_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
