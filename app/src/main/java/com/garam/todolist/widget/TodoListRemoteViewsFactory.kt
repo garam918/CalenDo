@@ -84,6 +84,7 @@ class TodoListRemoteViewsFactory(private val context: Context) : RemoteViewsServ
             is WidgetItem.PlanItem -> {
                 RemoteViews(pkg, R.layout.widget_item_plan_layout).apply {
                     setTextViewText(R.id.widget_item_plan_title_text, item.plan.title)
+                    setTextViewText(R.id.widget_item_plan_start_time_text,item.plan.startTime ?: "")
                     setInt(R.id.widget_plan_title_img,"setColorFilter", colorStringToColor(item.plan.color.toString(),context))
 
                     setInt(R.id.widget_plan_title_img,"setBackgroundResource",when(item.plan.color) {
@@ -130,8 +131,6 @@ class TodoListRemoteViewsFactory(private val context: Context) : RemoteViewsServ
 
     private fun loadData() {
         items.clear()
-
-//        CoroutineScope(Dispatchers.IO).launch {
 
         runBlocking {
             val flow = db.todoDao().getAllTodoList(uid.toString())
