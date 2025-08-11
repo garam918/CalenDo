@@ -86,6 +86,10 @@ class SettingMainFragment : Fragment() {
 
         }
 
+        binding.settingNotificationSetConstraint.setOnClickListener {
+            findNavController().navigate(R.id.action_settingMainFragment_to_notificationSettingFragment)
+        }
+
         binding.settingTermsOfUseConstraint.setOnClickListener {
             val intent = Intent(Intent.ACTION_VIEW, Uri.parse(mContext.getString(R.string.terms_of_use_string)))
             mContext.startActivity(intent)

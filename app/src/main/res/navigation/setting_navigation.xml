@@ -23,6 +23,10 @@
         <action
             android:id="@+id/action_settingMainFragment_to_categoryEditFragment"
             app:destination="@id/category_edit_fragment"/>
+
+        <action
+            android:id="@+id/action_settingMainFragment_to_notificationSettingFragment"
+            app:destination="@id/notification_setting_fragment"/>
     </fragment>
 
     <fragment
@@ -49,6 +53,14 @@
         android:label="fragment_category_edit"
         tools:lauyot="@layout/fragment_category_edit">
 
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/notification_setting_fragment"
+        android:name="com.garam.todolist.ui.setting.NotificationSettingFragment"
+        android:label="fragment_notification_setting"
+        tools:layout="@layout/fragment_notification_setting">
 
     </fragment>
 

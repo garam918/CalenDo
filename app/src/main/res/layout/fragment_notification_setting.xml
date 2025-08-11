@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.garam.todolist.ui.setting.SettingViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.setting.NotificationSettingFragment">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="35dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/notification_setting_constraint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:textAppearance="@style/setting_notification_set_explain_text_style"
+                android:layout_marginTop="12.5dp"
+                android:layout_marginBottom="12.5dp"
+                android:layout_marginStart="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/notification_setting_title_text"
+                android:text="푸시알림을 받으려면 휴대폰 알림을 켜주세요"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <ImageView
+                android:layout_marginEnd="12dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:id="@+id/notification_setting_next_btn"
+                android:src="@drawable/setting_next_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:background="@color/color_gray100"
+            android:alpha="0.1"
+            android:id="@+id/notification_setting_divider_first"
+            app:layout_constraintTop_toBottomOf="@id/notification_setting_constraint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/notification_setting_todo_constraint"
+            app:layout_constraintTop_toBottomOf="@id/notification_setting_divider_first"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@drawable/notification_setting_constraint_bg"
+                android:id="@+id/notification_setting_todo_title_constraint"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textAppearance="@style/setting_notification_set_alarm_title_text_style"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginStart="12dp"
+                    android:text="할일 알림"
+                    android:id="@+id/notification_setting_todo_title_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textAppearance="@style/setting_notification_set_alarm_explain_text_style"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="13dp"
+                    android:text="오늘 해야하는 할일을 미리 알려드려요"
+                    android:id="@+id/notification_setting_todo_explain_text"
+                    app:layout_constraintTop_toBottomOf="@id/notification_setting_todo_title_text"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/notification_setting_todo_title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Switch
+                    android:id="@+id/notification_todo_setting_switch"
+                    android:background="@null"
+                    android:thumb="@drawable/plan_all_day_thumb_selector"
+                    android:track="@drawable/plan_all_day_switch_selector"
+                    android:layout_marginEnd="12dp"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/notification_todo_time_setting_constraint"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/notification_setting_constraint_bg"
+                app:layout_constraintTop_toBottomOf="@id/notification_setting_todo_title_constraint"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:background="@color/color_gray100"
+            android:alpha="0.1"
+            android:layout_marginTop="10dp"
+            android:id="@+id/notification_setting_divider_second"
+            app:layout_constraintTop_toBottomOf="@id/notification_setting_todo_constraint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/notification_setting_all_day_plan_constraint"
+            app:layout_constraintTop_toBottomOf="@id/notification_setting_divider_second"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@drawable/notification_setting_constraint_bg"
+                android:id="@+id/notification_setting_all_day_plan_title_constraint"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textAppearance="@style/setting_notification_set_alarm_title_text_style"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginStart="12dp"
+                    android:text="하루종일 일정 알림"
+                    android:id="@+id/notification_setting_all_day_plan_title_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textAppearance="@style/setting_notification_set_alarm_explain_text_style"
+                    android:text="오늘 해야하는 일정을 미리 알려드려요"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="13dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/notification_setting_all_day_plan_title_text"
+                    app:layout_constraintStart_toStartOf="@id/notification_setting_all_day_plan_title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Switch
+                    android:id="@+id/notification_all_day_plan_setting_switch"
+                    android:background="@null"
+                    android:thumb="@drawable/plan_all_day_thumb_selector"
+                    android:track="@drawable/plan_all_day_switch_selector"
+                    android:layout_marginEnd="12dp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/notification_all_day_plan_time_setting_constraint"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/notification_setting_constraint_bg"
+                app:layout_constraintTop_toBottomOf="@id/notification_setting_all_day_plan_title_constraint"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <View
+            android:background="@color/color_gray100"
+            android:alpha="0.1"
+            android:layout_marginTop="10dp"
+            android:id="@+id/notification_setting_divider_third"
+            app:layout_constraintTop_toBottomOf="@id/notification_setting_all_day_plan_constraint"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_marginTop="10dp"
+            android:id="@+id/notification_setting_plan_constraint"
+            app:layout_constraintTop_toBottomOf="@id/notification_setting_divider_third"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:background="@drawable/notification_setting_constraint_bg"
+                android:id="@+id/notification_setting_plan_title_constraint"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:textAppearance="@style/setting_notification_set_alarm_title_text_style"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginStart="12dp"
+                    android:text="일정 알림"
+                    android:id="@+id/notification_setting_plan_title_text"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <TextView
+                    android:textAppearance="@style/setting_notification_set_alarm_explain_text_style"
+                    android:text="등록된 일정을 미리 알려드려요"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="13dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/notification_setting_plan_title_text"
+                    app:layout_constraintStart_toStartOf="@id/notification_setting_plan_title_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+                <Switch
+                    android:id="@+id/notification_plan_setting_switch"
+                    android:background="@null"
+                    android:thumb="@drawable/plan_all_day_thumb_selector"
+                    android:track="@drawable/plan_all_day_switch_selector"
+                    android:layout_marginEnd="12dp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/notification_plan_time_setting_constraint"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/notification_setting_constraint_bg"
+                app:layout_constraintTop_toBottomOf="@id/notification_setting_plan_title_constraint"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

@@ -406,6 +406,23 @@
         <item name="android:textColor">@color/color_gray100</item>
     </style>
 
+    <style name="setting_notification_set_explain_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textColor">@color/sub_color</item>
+    </style>
+
+    <style name="setting_notification_set_alarm_title_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/color_gray100</item>
+    </style>
+
+    <style name="setting_notification_set_alarm_explain_text_style" parent="spoqa_regular_text_style">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/color_gray60</item>
+    </style>
+
+
+
 
     <style name="setting_version_text_style" parent="spoqa_regular_text_style">
         <item name="android:textSize">12sp</item>

@@ -50,6 +50,7 @@ class SettingActivity : AppCompatActivity() {
                 R.id.account_setting_fragment -> "내 계정"
                 R.id.screen_setting_fragment -> "화면 커스텀"
                 R.id.category_edit_fragment -> "카테고리 관리"
+                R.id.notification_setting_fragment -> "알림 설정"
                 else -> "설정"
 
             }
