@@ -7,7 +7,7 @@
         tools:context=".ui.onboarding.OnboardingFirstFragment">
 
         <TextView
-            android:text="캘린두!"
+            android:text="뚜잇"
             android:layout_marginTop="80dp"
             android:textAppearance="@style/onboarding_title_text_style"
             android:id="@+id/onboarding_first_title_text"

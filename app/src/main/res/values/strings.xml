@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">캘린두!</string>
+    <string name="app_name">뚜잇</string>
 
     <string name="google_web_client_id">340758304072-5crudh1t1hkrajnugik01suou441c4kp.apps.googleusercontent.com</string>
     <string name="anonymous_login_btn_text"><u>로그인 없이 사용</u></string>

@@ -118,7 +118,7 @@
                 android:layout_marginBottom="22dp"
                 android:gravity="center"
                 terms_policy_text_bold="@{`a`}"
-                android:text="가입하면 캘린두의 이용약관 및 개인정보처리방침에 동의하게 됩니다."
+                android:text="가입하면 뚜잇의 이용약관 및 개인정보처리방침에 동의하게 됩니다."
                 android:textAppearance="@style/login_terms_policy_text_style"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

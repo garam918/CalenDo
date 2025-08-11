@@ -43,7 +43,7 @@
                         android:paddingTop="7dp"
                         android:paddingEnd="10dp"
                         android:paddingBottom="7dp"
-                        android:text="캘린두!"
+                        android:text="뚜잇"
                         android:textAppearance="@style/todo_mode_text_style"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/todo_btn"

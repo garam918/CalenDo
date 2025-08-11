@@ -20,10 +20,10 @@ object SettingBindingAdapter {
     fun setStartModeText(textView: TextView, startMode : String?) {
 
         when(startMode) {
-            "CalenDo" -> textView.text = "캘린두"
+            "CalenDo" -> textView.text = "뚜잇"
             "Todo" -> textView.text = "할일"
             "Plan" -> textView.text = "일정"
-            else -> textView.text = "캘린두"
+            else -> textView.text = "뚜잇"
         }
     }
 

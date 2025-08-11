@@ -39,7 +39,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
-            android:text="캘린두"
+            android:text="뚜잇"
             android:padding="12dp"
             android:textAppearance="@style/setting_screen_custom_dialog_menu_text_style"
             android:id="@+id/setting_screen_custom_first_menu_text"

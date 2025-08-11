@@ -90,7 +90,7 @@ class ScreenSettingFragment : Fragment() {
         if(type == "StartScreen") {
 
             screenSettingCustomDialogBinding.settingScreenCustomTitleText.text = "시작 화면 설정"
-            screenSettingCustomDialogBinding.settingScreenCustomFirstMenuText.text = "캘린두"
+            screenSettingCustomDialogBinding.settingScreenCustomFirstMenuText.text = "뚜잇"
             screenSettingCustomDialogBinding.settingScreenCustomSecondMenuText.text = "할일"
             screenSettingCustomDialogBinding.settingScreenCustomThirdMenuText.text = "일정"
 
