@@ -44,7 +44,7 @@ class DefaultTodoRepository @Inject constructor(
 
     override suspend fun getTodoByCategory(categoryId: String): Flow<List<Todo>> = localTodoDataSource.getTodoListByCategory(categoryId, userIdProvider.currentUserId).toExternal()
 
-    override suspend fun getTodoByGoal(goalId: String): Flow<List<Todo>> = localTodoDataSource.getTodoByGoal(goalId, userIdProvider.currentUserId).toExternal()
+    override suspend fun getTodoByGoal(goalId: String): List<Todo> = localTodoDataSource.getTodoByGoal(goalId, userIdProvider.currentUserId).toExternal()
 
     override suspend fun getTodoList() : Flow<List<Todo>> = localTodoDataSource.getAllTodoList(userIdProvider.currentUserId).toExternal()
 

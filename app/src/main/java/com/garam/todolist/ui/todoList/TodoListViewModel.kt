@@ -168,18 +168,35 @@ class TodoListViewModel @Inject constructor(
 
     fun getTodoByGoal(goalId : String) = viewModelScope.launch(Dispatchers.IO) {
 
+        val list = todoRepository.getTodoByGoal(goalId = goalId)
         Log.e("getTodoByGoal",goalId)
+        Log.e("repoTodoByGoal",list.toString())
 
-        todoRepository.getTodoByGoal(goalId = goalId).collectLatest {
-            _currentTodoInGoal.value = emptyList<Todo>()
-
-            if(it.isNotEmpty() && currentGoal.value?.goalId == it.first().categoryId) _currentTodoInGoal.value = it
-            else _currentTodoInGoal.value = emptyList()
-
-
-//            Log.e("currentTodoGoal",_currentTodoInGoal.value.first().categoryId.toString())
-            Log.e("currentTodoList",_currentTodoInGoal.value.toString())
-        }
+        if(goalId == "null") _currentTodoInGoal.value = emptyList()
+        else if(goalId == currentGoal.value?.goalId) _currentTodoInGoal.value = list
+//            .collectLatest {
+//
+//            Log.e("it.list0",it.toString())
+//            Log.e("goalId0",goalId)
+//            Log.e("currentGoal0",currentGoal.value?.goalId.toString())
+//
+//
+//            if(it.isNotEmpty() && currentGoal.value?.goalId == it.first().categoryId) {
+//                Log.e("it.list1",it.toString())
+//                Log.e("it.first",it.first().categoryId.toString())
+//                Log.e("currentGoal1",currentGoal.value?.goalId.toString())
+//                _currentTodoInGoal.value = it
+//            }
+//            else {
+//                Log.e("it.list2",it.toString())
+//                Log.e("currentGoal2",currentGoal.value?.goalId.toString())
+//                _currentTodoInGoal.value = emptyList()
+//            }
+//
+//
+////            Log.e("currentTodoGoal",_currentTodoInGoal.value.first().categoryId.toString())
+//            Log.e("currentTodoList",_currentTodoInGoal.value.size.toString())
+//        }
     }
 
     fun addTodo(selectedDate : String, categoryId : String?, title : String) = viewModelScope.launch {
@@ -213,14 +230,15 @@ class TodoListViewModel @Inject constructor(
         }
         else if(currentTodoInGoal.value.first().categoryId != goalId) currentTodoInGoal.value = emptyList()
 
-        todoRepository.saveTodo(
-            Todo(id = UUID.randomUUID().toString(),
-                categoryId = goalId, title = "", startDate = startDate,
-                endDate = endDate, repeatRule = null,status = mutableMapOf(startDate to TodoStatus.NONE),
-                priority = false, memo = "", color = null, icon = null, index = null, startTime = null,
-                savedTime = Timestamp.now()))
+        val todo = Todo(id = UUID.randomUUID().toString(),
+            categoryId = goalId, title = "", startDate = startDate,
+            endDate = endDate, repeatRule = null,status = mutableMapOf(startDate to TodoStatus.NONE),
+            priority = false, memo = "", color = null, icon = null, index = null, startTime = null,
+            savedTime = Timestamp.now())
 
+        todoRepository.saveTodo(todo)
 
+        addTodoInGoal(todo)
     }
 
     fun updateTodo(todo: Todo) = viewModelScope.launch {
@@ -232,6 +250,17 @@ class TodoListViewModel @Inject constructor(
         todoRepository.deleteTodo(todoId)
     }
 
+    fun deleteTodoInGoal(todoId: String) = _currentTodoInGoal.update {
+        val list = it.toMutableList()
+        list.removeIf { it.id == todoId }
+        list
+    }
+
+    fun addTodoInGoal(todo: Todo) = _currentTodoInGoal.update {
+        val list = it.toMutableList()
+        list.add(todo)
+        list
+    }
 
     fun getPlanList() {
 

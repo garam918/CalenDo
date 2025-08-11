@@ -19,7 +19,7 @@ interface TodoDao {
     fun getTodoListByCategory(categoryId : String, uid: String) : Flow<List<LocalTodo>>
 
     @Query("SELECT * FROM todo WHERE categoryId = :goalId AND userId = :uid")
-    fun getTodoByGoal(goalId: String, uid: String) : Flow<List<LocalTodo>>
+    fun getTodoByGoal(goalId: String, uid: String) : List<LocalTodo>
 
     @Query("DELETE FROM todo WHERE id = :id AND userId = :uid")
     suspend fun deleteTodo(id : String, uid: String)

@@ -9,7 +9,7 @@ interface TodoRepository {
 
     suspend fun getTodoList() : Flow<List<Todo>>
     suspend fun getTodoByCategory(categoryId : String) : Flow<List<Todo>>
-    suspend fun getTodoByGoal(goalId : String) : Flow<List<Todo>>
+    suspend fun getTodoByGoal(goalId : String) : List<Todo>
 
 
     suspend fun saveTodo(todo: Todo)
