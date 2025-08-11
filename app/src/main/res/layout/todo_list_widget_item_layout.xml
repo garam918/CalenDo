@@ -12,8 +12,8 @@
         android:layout_gravity="center"
         android:id="@+id/widget_todo_check_box"
         android:src="@drawable/todo_status_none_icon"
-        android:layout_width="24dp"
-        android:layout_height="24dp"/>
+        android:layout_width="18dp"
+        android:layout_height="18dp"/>
 
     <TextView
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -21,7 +21,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:textSize="14sp"
+        android:textSize="15sp"
         android:textColor="@android:color/black" />
 
 
