@@ -19,7 +19,7 @@ android {
         applicationId = "com.garam.todolist"
         minSdk = 30
         targetSdk = 35
-        versionCode = 16
+        versionCode = 19
         versionName = "1.0.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
