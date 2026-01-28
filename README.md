@@ -10,8 +10,8 @@
 
 ## 사용 기술
 
-- `Kotlin-2.1.0`
-- `Databinding`, `Room:2.6.1`, `Hilt:2.55`, `coroutine:1.10.1`, `firebase-bom:33.10.0 `, `kizitonwose:2.6.2`
+- `Kotlin-2.2.21`
+- `Compose Multiplatform:1.9.3`, `Room:2.8.0`, `Koin:4.10`, `coroutine:1.10.1`, `firebase-bom:33.10.0 `, `ksp:2.2.21-2.0.4`
 
 ---
 
@@ -26,6 +26,7 @@
  - #### 로그인
    
    - 구글 로그인 기능
+   - 애플 로그인 기능(iOS)
    - 익명 로그인 기능
 
 
@@ -41,18 +42,18 @@
 
 ## 업데이트 예정
  
- 1) 바탕화면 위젯 기능 - 8.12 업데이트 완료
+ 1) 일정 알림 기능
 
- 2) 스낵바 - 8.12 업데이트 완료
+ 2) iOS 위젯 기능
 
- 3) 일정 알림 기능
-
- 4) 소셜 로그인
-    - 네이버, 카카오, 애플 로그인 추가 예정
-
- 5) KMP + CMP 구조로 변환 후 iOS 출시 예정(26년 1월 이내)
+ 3) 소셜 로그인
+    - 네이버, 카카오 로그인 추가 예정
 ---
 
 ## 플레이스토어
 
 https://play.google.com/store/apps/details?id=com.garam.todolist&hl=ko
+
+## 앱스토어
+
+
