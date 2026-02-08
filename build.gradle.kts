@@ -6,5 +6,12 @@ plugins {
     alias(libs.plugins.googlDevToolsKSP) apply false
     id("com.google.gms.google-services") version "4.4.2" apply false
     id("com.google.firebase.crashlytics") version "3.0.3" apply false
-    id("androidx.room") version "2.6.1" apply false
+//    id("androidx.room") version "2.7.2" apply false
+    alias(libs.plugins.kotlinMultiplatform) apply false
+    alias(libs.plugins.android.kotlin.multiplatform.library) apply false
+//    alias(libs.plugins.android.lint) apply false
+    alias(libs.plugins.composeCompiler) apply false
+    alias(libs.plugins.composeMultiplatform) apply false
+
+    alias(libs.plugins.kotlinCocoapods) apply false
 }

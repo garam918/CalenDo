@@ -16,9 +16,13 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven("https://www.jetbrains.com/intellij-repository/releases")
+        maven("https://maven.pkg.jetbrains.space/public/p/compose/dev")
     }
 }
 
-rootProject.name = "TodoList"
+rootProject.name = "CalenDo"
 include(":app")
- 
+include(":shared")
+include(":iosApp")
+//include(":desktopApp")

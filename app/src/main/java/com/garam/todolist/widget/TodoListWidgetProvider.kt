@@ -13,6 +13,7 @@ import android.os.Build
 import android.util.Log
 import android.widget.RemoteViews
 import androidx.room.Room
+import com.garam.todolist.MainActivity
 import com.garam.todolist.R
 import com.garam.todolist.data.Todo
 import com.garam.todolist.data.TodoStatus
@@ -65,7 +66,7 @@ class TodoListWidgetProvider: AppWidgetProvider() {
             views.setTextViewText(R.id.widget_today_text, localDateToWidgetDateString(today) + " 오늘")
             views.setRemoteAdapter(widgetId,R.id.widget_todo_list_view, intent)
 
-            val openIntent = Intent(context, TodoListActivity::class.java)
+            val openIntent = Intent(context, MainActivity::class.java)
             val openPendingIntent = PendingIntent.getActivity(
                 context, 0, openIntent, PendingIntent.FLAG_IMMUTABLE
             )
@@ -79,7 +80,7 @@ class TodoListWidgetProvider: AppWidgetProvider() {
             )
             views.setOnClickPendingIntent(R.id.widget_refresh_btn, refreshPendingIntent)
 
-            val templateIntent = Intent(context, TodoListActivity::class.java)
+            val templateIntent = Intent(context, MainActivity::class.java)
             val pendingTemplate = PendingIntent.getActivity(
                 context, 0, templateIntent, PendingIntent.FLAG_IMMUTABLE
             )

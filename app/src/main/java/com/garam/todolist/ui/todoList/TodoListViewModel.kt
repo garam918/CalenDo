@@ -14,7 +14,7 @@ import com.garam.todolist.data.source.SharedPreferenceStorage
 import com.garam.todolist.util.functions.getWeekStartEnd
 import com.garam.todolist.util.functions.localDateToString
 import com.google.firebase.Timestamp
-import com.kizitonwose.calendar.core.yearMonth
+//import com.kizitonwose.calendar.core.yearMonth
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -43,7 +43,9 @@ class TodoListViewModel @Inject constructor(
 
     val isExpandTodoListInGoal = MutableStateFlow(false)
 
-    val currentMonth : MutableStateFlow<YearMonth> = MutableStateFlow(LocalDate.now().yearMonth)
+//    val currentMonth : MutableStateFlow<YearMonth> = MutableStateFlow(
+//        LocalDate.now().yearMonth
+//    )
     val currentMonthString : MutableStateFlow<String> = MutableStateFlow("")
 
     private val _categoryList = MutableStateFlow<List<Category>>(emptyList())

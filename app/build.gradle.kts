@@ -6,8 +6,12 @@ plugins {
     id("kotlin-kapt")
     id("com.google.gms.google-services")
     id("com.google.firebase.crashlytics")
-    id("androidx.room")
+    alias(libs.plugins.androidx.room)
     id("kotlin-parcelize")
+
+
+    alias(libs.plugins.composeCompiler)
+    alias(libs.plugins.composeMultiplatform)
 }
 
 
@@ -19,8 +23,11 @@ android {
         applicationId = "com.garam.todolist"
         minSdk = 30
         targetSdk = 35
-        versionCode = 19
-        versionName = "1.0.1"
+        versionCode = 20260121
+        versionName = "1.0.0"
+
+
+
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -62,6 +69,8 @@ room {
 
 dependencies {
 
+    implementation(project(":shared"))
+
     implementation(libs.androidx.core.ktx)
     implementation(libs.bundles.androidx)
 
@@ -80,21 +89,24 @@ dependencies {
 
 
     implementation(libs.hilt)
-    kapt(libs.hilt.compiler)
+//    kapt(libs.hilt.compiler)
+    ksp(libs.hilt.compiler)
 
-    implementation(libs.hilt.android.testing)
     testImplementation(libs.hilt.android.testing)
     testAnnotationProcessor(libs.hilt.android.compiler)
-    kaptTest(libs.hilt.android.compiler)
+//    kaptTest(libs.hilt.android.compiler)
+    kspTest(libs.hilt.android.compiler)
 
     androidTestImplementation(libs.hilt.android.testing)
-    kaptAndroidTest(libs.hilt.android.compiler)
-    kapt (libs.dagger.hilt.compiler)
+//    kaptAndroidTest(libs.hilt.android.compiler)
+//    kapt (libs.dagger.hilt.compiler)
+    kspAndroidTest(libs.hilt.android.compiler)
+    ksp (libs.dagger.hilt.compiler)
 
     implementation(libs.coroutine.core)
     implementation(libs.coroutine.android)
 
-    implementation("com.kizitonwose.calendar:view:2.6.2")
+//    implementation("com.kizitonwose.calendar:view:2.6.2")
 
     implementation("androidx.credentials:credentials-play-services-auth:1.3.0")
     implementation("com.google.android.libraries.identity.googleid:googleid:1.1.1")
@@ -114,4 +126,24 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation(compose.runtime)
+    implementation(compose.foundation)
+    implementation(compose.material3)
+    implementation(compose.ui)
+    implementation(compose.components.resources)
+    implementation(compose.components.uiToolingPreview)
+    implementation(libs.androidx.lifecycle.viewmodelCompose)
+    implementation(libs.androidx.lifecycle.runtimeCompose)
+    implementation(compose.preview)
+    implementation(libs.androidx.activity.compose)
+
+    implementation(libs.koin.android)
+    implementation(libs.androidx.room.sqlite.wrapper)
+
+
+//    implementation(libs.compose.resources)
+
+    testImplementation(libs.androidx.runner)
+
 }

@@ -30,8 +30,8 @@ interface TodoDao {
     @Upsert
     suspend fun upsertTodo(todo : LocalTodo)
 
-    @Query("SELECT * FROM todo WHERE startDate = :selectedDate AND userId = :uid")
-    suspend fun getPlanList(selectedDate : String, uid: String) : List<LocalTodo>
+//    @Query("SELECT * FROM todo WHERE startDate = :selectedDate AND userId = :uid")
+//    suspend fun getPlanList(selectedDate : String, uid: String) : List<LocalTodo>
 
 
     @Upsert
