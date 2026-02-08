@@ -10,13 +10,17 @@ import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import androidx.core.content.ContextCompat
 import androidx.room.Room
+import com.garam.shared.data.toExternal
 import com.garam.todolist.R
+import com.garam.todolist.data.CategoryIconType
+import com.garam.todolist.data.Todo
 import com.garam.todolist.data.TodoStatus
 import com.garam.todolist.data.source.local.TodoDatabase
 import com.garam.todolist.data.toExternal
 import com.garam.todolist.util.functions.colorStringToColor
 import com.garam.todolist.util.functions.filterTodosByDate
 import com.garam.todolist.util.functions.iconToDrawable
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,6 +41,15 @@ class TodoListRemoteViewsFactory(private val context: Context) : RemoteViewsServ
             context.applicationContext,
             TodoDatabase::class.java,
             "Todo.db"
+        ).fallbackToDestructiveMigration().build()
+    }
+
+    private val widgetDb by lazy {
+        Room.databaseBuilder(
+            context.applicationContext,
+            com.garam.shared.data.source.local.TodoDatabase::class.java,
+//            TodoDatabase::class.java,
+            "todo.db"
         ).fallbackToDestructiveMigration().build()
     }
 
@@ -133,16 +146,53 @@ class TodoListRemoteViewsFactory(private val context: Context) : RemoteViewsServ
         items.clear()
 
         runBlocking {
-            val flow = db.todoDao().getAllTodoList(uid.toString())
+            val flow = widgetDb.todoDao().getAllTodoList(uid.toString())
             val todos = runBlocking {
                 withContext(Dispatchers.IO) {
                     flow.first()
                 }
             }
 
+            Log.e("widget todo", todos.toString())
+
             val wholeTodos = todos.map { it.toExternal() }
-            val todayTodos = filterTodosByDate( todos = wholeTodos.filter { it.categoryId != null }, LocalDate.now())
-            val todayPlans = filterTodosByDate( todos = wholeTodos.filter { it.categoryId == null }, LocalDate.now())
+            val todayTodos = filterTodosByDate( todos = wholeTodos.filter { it.categoryId != null }.map { Todo(
+                id = it.id,
+                title = it.title,
+                startDate = it.startDate,
+                endDate = it.endDate,
+                startTime = it.startTime,
+                icon = null,
+                color = it.color,
+                status = it.status?.toList()?.map {
+                    it.first to TodoStatus.valueOf(it.second.name)
+                }?.toList()?.toMap() as MutableMap<String, TodoStatus>?,
+                categoryId = it.categoryId,
+                priority = it.priority,
+                memo = it.memo,
+                index = it.index,
+                savedTime = Timestamp.now(),
+                repeatRule = it.repeatRule
+
+            ) }, LocalDate.now())
+            val todayPlans = filterTodosByDate( todos = wholeTodos.filter { it.categoryId == null }.map { Todo(
+                id = it.id,
+                title = it.title,
+                startDate = it.startDate,
+                endDate = it.endDate,
+                startTime = it.startTime,
+                icon = CategoryIconType.valueOf(it.icon?.name.toString()),
+//                    it.icon as CategoryIconType?,
+                color = it.color,
+                status = null,
+                categoryId = it.categoryId,
+                priority = it.priority,
+                memo = it.memo,
+                index = it.index,
+                savedTime = Timestamp.now(),
+                repeatRule = it.repeatRule
+
+            ) }, LocalDate.now())
 
             items.add(WidgetItem.Divider("할일"))
             val widgetTodos = todayTodos.map { WidgetItem.TodoItem(it) }

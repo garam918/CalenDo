@@ -11,7 +11,7 @@ interface AccountDao {
     @Upsert
     suspend fun saveUserData(userData : LocalUserData)
 
-    @Query("SELECT * FROM user WHERE uid = :uid")
-    suspend fun getUserInfo(uid : String) : LocalUserData?
+//    @Query("SELECT * FROM user WHERE uid = :uid")
+//    suspend fun getUserInfo(uid : String) : LocalUserData?
 
 }

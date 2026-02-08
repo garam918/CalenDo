@@ -1,0 +1,34 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="22dp"
+    android:height="22dp"
+    android:viewportWidth="22"
+    android:viewportHeight="22">
+  <path
+      android:pathData="M0,0h22v22h-22z"
+      android:fillColor="#ffffff"
+      android:fillAlpha="0.01"/>
+  <path
+      android:pathData="M17.875,14.438H15.813V12.375H14.438V14.438H12.375V15.813H14.438V17.875H15.813V15.813H17.875V14.438Z"
+      android:fillColor="#0F0F0F"/>
+  <path
+      android:pathData="M15.125,20.625C12.1,20.625 9.625,18.15 9.625,15.125C9.625,12.1 12.1,9.625 15.125,9.625C18.15,9.625 20.625,12.1 20.625,15.125C20.625,18.15 18.15,20.625 15.125,20.625ZM15.125,11C12.856,11 11,12.856 11,15.125C11,17.394 12.856,19.25 15.125,19.25C17.394,19.25 19.25,17.394 19.25,15.125C19.25,12.856 17.394,11 15.125,11Z"
+      android:fillColor="#0F0F0F"/>
+  <path
+      android:pathData="M19.25,4.125C19.25,3.369 18.631,2.75 17.875,2.75H15.125V1.375H13.75V2.75H8.25V1.375H6.875V2.75H4.125C3.369,2.75 2.75,3.369 2.75,4.125V17.875C2.75,18.631 3.369,19.25 4.125,19.25H8.25V17.875H4.125V4.125H6.875V5.5H8.25V4.125H13.75V5.5H15.125V4.125H17.875V8.25H19.25V4.125Z"
+      android:fillColor="#0F0F0F"/>
+  <path
+      android:pathData="M17.875,14.438H15.813V12.375H14.438V14.438H12.375V15.813H14.438V17.875H15.813V15.813H17.875V14.438Z"
+      android:strokeWidth="0.3"
+      android:fillColor="#00000000"
+      android:strokeColor="#0F0F0F"/>
+  <path
+      android:pathData="M15.125,20.625C12.1,20.625 9.625,18.15 9.625,15.125C9.625,12.1 12.1,9.625 15.125,9.625C18.15,9.625 20.625,12.1 20.625,15.125C20.625,18.15 18.15,20.625 15.125,20.625ZM15.125,11C12.856,11 11,12.856 11,15.125C11,17.394 12.856,19.25 15.125,19.25C17.394,19.25 19.25,17.394 19.25,15.125C19.25,12.856 17.394,11 15.125,11Z"
+      android:strokeWidth="0.3"
+      android:fillColor="#00000000"
+      android:strokeColor="#0F0F0F"/>
+  <path
+      android:pathData="M19.25,4.125C19.25,3.369 18.631,2.75 17.875,2.75H15.125V1.375H13.75V2.75H8.25V1.375H6.875V2.75H4.125C3.369,2.75 2.75,3.369 2.75,4.125V17.875C2.75,18.631 3.369,19.25 4.125,19.25H8.25V17.875H4.125V4.125H6.875V5.5H8.25V4.125H13.75V5.5H15.125V4.125H17.875V8.25H19.25V4.125Z"
+      android:strokeWidth="0.3"
+      android:fillColor="#00000000"
+      android:strokeColor="#0F0F0F"/>
+</vector>

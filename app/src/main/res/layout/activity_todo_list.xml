@@ -185,19 +185,19 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <com.kizitonwose.calendar.view.CalendarView
-                        android:id="@+id/month_calendar_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"
-                        app:cv_dayViewResource="@layout/week_calendar_item_layout" />
+<!--                    <com.kizitonwose.calendar.view.CalendarView-->
+<!--                        android:id="@+id/month_calendar_view"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:visibility="gone"-->
+<!--                        app:cv_dayViewResource="@layout/week_calendar_item_layout" />-->
 
-                    <com.kizitonwose.calendar.view.WeekCalendarView
-                        android:id="@+id/week_calendar_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="70dp"
-                        android:visibility="visible"
-                        app:cv_dayViewResource="@layout/week_calendar_item_layout" />
+<!--                    <com.kizitonwose.calendar.view.WeekCalendarView-->
+<!--                        android:id="@+id/week_calendar_view"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="70dp"-->
+<!--                        android:visibility="visible"-->
+<!--                        app:cv_dayViewResource="@layout/week_calendar_item_layout" />-->
                 </LinearLayout>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>

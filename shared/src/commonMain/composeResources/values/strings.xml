@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">뚜잇</string>
+
+    <string name="google_web_client_id">340758304072-5crudh1t1hkrajnugik01suou441c4kp.apps.googleusercontent.com</string>
+    <string name="google_ios_oauth_client_id">340758304072-n4o1f1lgmkfeh37g9hrfnjan2q546njn.apps.googleusercontent.com</string>
+    <string name="anonymous_login_btn_text"><u>로그인 없이 사용</u></string>
+    <string name="terms_of_use_string">https://www.termsfeed.com/live/92935016-10b6-42fb-8a13-382b137d7c1d</string>
+    <string name="privacy_policy_string">https://www.privacypolicies.com/live/e700aa59-9b9b-4be9-89fb-5b7454795576</string>
+    <string name="calendo_feedback_link_string">https://docs.google.com/forms/d/1kSKdNMfWOiWGyBpEFmFlyGFgVP9aiN_yK3gPSQEYdNg/edit</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+
+    <string name="onboarding_first_explain_text">일정 캘린더와 투두리스트를  한 번에!\n두 마리 토끼를 잡는 똑똑한 관리</string>
+    <string name="onboarding_second_explain_text">이번 달 목표부터,\n오늘의 할 일까지 정리해보세요!</string>
+    <string name="onboarding_third_explain_text">중요한 일정은 미리 등록하고\n놓치지 마세요</string>
+
+</resources>

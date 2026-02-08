@@ -100,8 +100,8 @@ import com.garam.todolist.util.setSingleOnClickListener
 import com.garam.todolist.widget.widgetUpdate
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.kizitonwose.calendar.core.*
-import com.kizitonwose.calendar.view.*
+//import com.kizitonwose.calendar.core.*
+//import com.kizitonwose.calendar.view.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.collectLatest
@@ -157,8 +157,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
     override fun submitTodoCount(categoryId: String, count: Int) {
 
-        binding.monthCalendarView.notifyCalendarChanged()
-        binding.weekCalendarView.notifyCalendarChanged()
+//        binding.monthCalendarView.notifyCalendarChanged()
+//        binding.weekCalendarView.notifyCalendarChanged()
 
     }
 
@@ -283,16 +283,16 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
 //        requestNotificationPermission()
 
-        var daysOfWeek =
-            daysOfWeek(firstDayOfWeek = if (viewModel.firstDayOfWeekFlow.value == "Mon") DayOfWeek.MONDAY else DayOfWeek.SUNDAY)
+//        var daysOfWeek =
+//            daysOfWeek(firstDayOfWeek = if (viewModel.firstDayOfWeekFlow.value == "Mon") DayOfWeek.MONDAY else DayOfWeek.SUNDAY)
         binding.titlesContainer.root.children
             .filterIsInstance<LinearLayout>()
             .flatMap { it.children }
             .filterIsInstance<TextView>()
 //            .map { it as TextView }
             .forEachIndexed { index, textView ->
-                textView.text =
-                    daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.getDefault())
+//                textView.text =
+//                    daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.getDefault())
 
                 if (textView.text.toString() == LocalDate.parse(viewModel.selectedDate.value.toString()).dayOfWeek.getDisplayName(
                         TextStyle.SHORT,
@@ -349,8 +349,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                     }
                 }
 
-                setupWeekCalendar(startMonth, endMonth, currentMonth, daysOfWeek)
-                setupMonthCalendar(startMonth, endMonth, currentMonth, daysOfWeek)
+//                setupWeekCalendar(startMonth, endMonth, currentMonth, daysOfWeek)
+//                setupMonthCalendar(startMonth, endMonth, currentMonth, daysOfWeek)
             }
         }
 
@@ -362,8 +362,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             viewModel.currentMode.value = "CalenDo"
 
-            binding.weekCalendarView.notifyCalendarChanged()
-            binding.monthCalendarView.notifyCalendarChanged()
+//            binding.weekCalendarView.notifyCalendarChanged()
+//            binding.monthCalendarView.notifyCalendarChanged()
         }
 
         binding.todoBtn.setOnClickListener {
@@ -374,8 +374,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             viewModel.currentMode.value = "Todo"
 
-            binding.weekCalendarView.notifyCalendarChanged()
-            binding.monthCalendarView.notifyCalendarChanged()
+//            binding.weekCalendarView.notifyCalendarChanged()
+//            binding.monthCalendarView.notifyCalendarChanged()
         }
 
         binding.planBtn.setOnClickListener {
@@ -386,8 +386,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             viewModel.currentMode.value = "Plan"
 
-            binding.weekCalendarView.notifyCalendarChanged()
-            binding.monthCalendarView.notifyCalendarChanged()
+//            binding.weekCalendarView.notifyCalendarChanged()
+//            binding.monthCalendarView.notifyCalendarChanged()
         }
 
         binding.settingBtn.setOnClickListener {
@@ -401,8 +401,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 dateClicked(LocalDate.now())
                 isProgrammaticWeekScroll = true
                 isProgrammaticMonthScroll = true
-                binding.weekCalendarView.scrollToWeek(LocalDate.now())
-                binding.monthCalendarView.scrollToMonth(LocalDate.now().yearMonth)
+//                binding.weekCalendarView.scrollToWeek(LocalDate.now())
+//                binding.monthCalendarView.scrollToMonth(LocalDate.now().yearMonth)
             }
 
         }
@@ -438,8 +438,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             viewModel.addTodo(viewModel.selectedDate.value.toString(), viewModel.currentSelectedCategory.value!!.categoryId, "").invokeOnCompletion {
 
-                binding.weekCalendarView.notifyDateChanged(LocalDate.parse(viewModel.selectedDate.value))
-                binding.monthCalendarView.notifyDateChanged(LocalDate.parse(viewModel.selectedDate.value))
+//                binding.weekCalendarView.notifyDateChanged(LocalDate.parse(viewModel.selectedDate.value))
+//                binding.monthCalendarView.notifyDateChanged(LocalDate.parse(viewModel.selectedDate.value))
 
             }
             widgetUpdate(this)
@@ -500,23 +500,23 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             if (viewModel.currentGoal.value == null) {
 
-                var (startDate, endDate) = if (viewModel.isWeekMode.value == true) getWeekStartEnd(
-                    binding.weekCalendarView.findFirstVisibleWeek()?.days[0]!!.date.toString()
-                )
-                else getMonthStartAndEnd(viewModel.currentMonth.value.atDay(1).toString())
+//                var (startDate, endDate) = if (viewModel.isWeekMode.value == true) getWeekStartEnd(
+//                    binding.weekCalendarView.findFirstVisibleWeek()?.days[0]!!.date.toString()
+//                )
+//                else getMonthStartAndEnd(viewModel.currentMonth.value.atDay(1).toString())
 
-                val goal = Goal(
-                    goalId = UUID.randomUUID().toString(),
-                    title = "",
-                    startDate = startDate, endDate = endDate, type = if (viewModel.isWeekMode.value == true) GoalType.WEEKLY
-                    else GoalType.MONTHLY
-                )
+//                val goal = Goal(
+//                    goalId = UUID.randomUUID().toString(),
+//                    title = "",
+//                    startDate = startDate, endDate = endDate, type = if (viewModel.isWeekMode.value == true) GoalType.WEEKLY
+//                    else GoalType.MONTHLY
+//                )
 
-                viewModel.addGoal(goal).invokeOnCompletion {
-                    viewModel.currentGoal.value = goal
-
-                    addTodoInGoal()
-                }
+//                viewModel.addGoal(goal).invokeOnCompletion {
+//                    viewModel.currentGoal.value = goal
+//
+//                    addTodoInGoal()
+//                }
             }
             else addTodoInGoal()
 
@@ -533,53 +533,53 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
                         var goal: Goal?
 
-                        if (viewModel.currentGoal.value == null) {
+//                        if (viewModel.currentGoal.value == null) {
 
-                            var (startDate, endDate) = getWeekStartEnd(binding.weekCalendarView.findFirstVisibleWeek()?.days[0]!!.date.toString())
+//                            var (startDate, endDate) = getWeekStartEnd(binding.weekCalendarView.findFirstVisibleWeek()?.days[0]!!.date.toString())
+//
+//                            goal = Goal(
+//                                goalId = UUID.randomUUID().toString(),
+//                                title = binding.weekGoalTitleText.text.toString(),
+//                                startDate = startDate, endDate = endDate, type = GoalType.WEEKLY
+//                            )
+//                        } else goal =
+//                            viewModel.currentGoal.value?.copy(title = binding.weekGoalTitleText.text.toString())
 
-                            goal = Goal(
-                                goalId = UUID.randomUUID().toString(),
-                                title = binding.weekGoalTitleText.text.toString(),
-                                startDate = startDate, endDate = endDate, type = GoalType.WEEKLY
-                            )
-                        } else goal =
-                            viewModel.currentGoal.value?.copy(title = binding.weekGoalTitleText.text.toString())
-
-                        viewModel.addGoal(goal!!).invokeOnCompletion {
-                            Log.e("addGoal", "success")
-
-                            viewModel.currentGoal.value = goal
-                        }
+//                        viewModel.addGoal(goal!!).invokeOnCompletion {
+//                            Log.e("addGoal", "success")
+//
+//                            viewModel.currentGoal.value = goal
+//                        }
                     } else {
-                        var (startDate, endDate) = getMonthStartAndEnd(
-                            viewModel.currentMonth.value.atDay(
-                                1
-                            ).toString()
-                        )
+//                        var (startDate, endDate) = getMonthStartAndEnd(
+//                            viewModel.currentMonth.value.atDay(
+//                                1
+//                            ).toString()
+//                        )
 
                         var goal: Goal?
 
-                        if (viewModel.currentGoal.value == null) {
-
-                            var (startDate, endDate) = getMonthStartAndEnd(
-                                viewModel.currentMonth.value.atDay(
-                                    1
-                                ).toString()
-                            )
-
-                            goal = Goal(
-                                goalId = UUID.randomUUID().toString(),
-                                title = binding.weekGoalTitleText.text.toString(),
-                                startDate = startDate, endDate = endDate, type = GoalType.MONTHLY
-                            )
-                        } else goal =
-                            viewModel.currentGoal.value?.copy(title = binding.weekGoalTitleText.text.toString())
-
-                        viewModel.addGoal(goal!!).invokeOnCompletion {
-                            Log.e("addGoal", "success")
-
-                            viewModel.currentGoal.value = goal
-                        }
+//                        if (viewModel.currentGoal.value == null) {
+//
+//                            var (startDate, endDate) = getMonthStartAndEnd(
+//                                viewModel.currentMonth.value.atDay(
+//                                    1
+//                                ).toString()
+//                            )
+//
+//                            goal = Goal(
+//                                goalId = UUID.randomUUID().toString(),
+//                                title = binding.weekGoalTitleText.text.toString(),
+//                                startDate = startDate, endDate = endDate, type = GoalType.MONTHLY
+//                            )
+//                        } else goal =
+//                            viewModel.currentGoal.value?.copy(title = binding.weekGoalTitleText.text.toString())
+//
+//                        viewModel.addGoal(goal!!).invokeOnCompletion {
+//                            Log.e("addGoal", "success")
+//
+//                            viewModel.currentGoal.value = goal
+//                        }
                     }
 
                 }
@@ -597,7 +597,7 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 verticalOffset == 0 -> {
                     // 완전히 펼쳐진 상태
                     binding.todoCollapsingDivideView.visibility = View.GONE
-                    viewModel.currentMonthString.value = monthToString(viewModel.currentMonth.value)
+//                    viewModel.currentMonthString.value = monthToString(viewModel.currentMonth.value)
                 }
 
                 abs(verticalOffset) >= totalScrollRange -> {
@@ -619,7 +619,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
     private fun showPlanAddDialog(todo: Todo?) {
 
-        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetTheme)
+        val bottomSheetDialog = BottomSheetDialog(this
+//            , R.style.BottomSheetTheme
+        )
         val planAddDialogView = PlanAddBottomSheetLayoutBinding.inflate(layoutInflater)
 
         planAddDialogView.root.setOnTouchListener { v, event ->
@@ -1092,7 +1094,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
 
     private fun showTodoEditDialog(todo: Todo) {
-        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetTheme)
+        val bottomSheetDialog = BottomSheetDialog(this
+//            , R.style.BottomSheetTheme
+        )
         val todoEditBottomSheetView = TodoEditBottomSheetLayoutBinding.inflate(layoutInflater)
 
         bottomSheetDialog.setContentView(todoEditBottomSheetView.root)
@@ -1126,20 +1130,20 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 if (todo.status?.get(viewModel.selectedDate.value.toString()) == TodoStatus.COMPLETED
                     || todo.status?.get(viewModel.selectedDate.value.toString()) == TodoStatus.IN_PROGRESS) {
                     todoEditBottomSheetView.todoTodayTomorrowBtn.text = "내일도 하기"
-                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
-                        0,
-                        R.drawable.todo_edit_plus_icon,
-                        0,
-                        0
-                    )
+//                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
+//                        0,
+//                        R.drawable.todo_edit_plus_icon,
+//                        0,
+//                        0
+//                    )
                 } else {
                     todoEditBottomSheetView.todoTodayTomorrowBtn.text = "내일 하기"
-                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
-                        0,
-                        R.drawable.todo_tomorrow_icon,
-                        0,
-                        0
-                    )
+//                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
+//                        0,
+//                        R.drawable.todo_tomorrow_icon,
+//                        0,
+//                        0
+//                    )
 
 
                 }
@@ -1152,20 +1156,20 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 if (todo.status?.get(viewModel.selectedDate.value.toString()) == TodoStatus.COMPLETED
                     || todo.status?.get(viewModel.selectedDate.value.toString()) == TodoStatus.IN_PROGRESS) {
                     todoEditBottomSheetView.todoTodayTomorrowBtn.text = "오늘도 하기"
-                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
-                        0,
-                        R.drawable.todo_edit_tomorrow_check_icon,
-                        0,
-                        0
-                    )
+//                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
+//                        0,
+//                        R.drawable.todo_edit_tomorrow_check_icon,
+//                        0,
+//                        0
+//                    )
                 } else {
                     todoEditBottomSheetView.todoTodayTomorrowBtn.text = "오늘 하기"
-                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
-                        0,
-                        R.drawable.todo_edit_check_icon,
-                        0,
-                        0
-                    )
+//                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
+//                        0,
+//                        R.drawable.todo_edit_check_icon,
+//                        0,
+//                        0
+//                    )
                 }
 
             }
@@ -1176,21 +1180,21 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 if (todo.status?.get(viewModel.selectedDate.value.toString()) == TodoStatus.COMPLETED
                     || todo.status?.get(viewModel.selectedDate.value.toString()) == TodoStatus.IN_PROGRESS) {
                     todoEditBottomSheetView.todoTodayTomorrowBtn.text = "오늘도 하기"
-                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
-                        0,
-                        R.drawable.todo_edit_tomorrow_check_icon,
-                        0,
-                        0
-                    )
+//                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
+//                        0,
+//                        R.drawable.todo_edit_tomorrow_check_icon,
+//                        0,
+//                        0
+//                    )
 
                 } else {
                     todoEditBottomSheetView.todoTodayTomorrowBtn.text = "오늘 하기"
-                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
-                        0,
-                        R.drawable.todo_edit_check_icon,
-                        0,
-                        0
-                    )
+//                    todoEditBottomSheetView.todoTodayTomorrowBtn.setCompoundDrawablesWithIntrinsicBounds(
+//                        0,
+//                        R.drawable.todo_edit_check_icon,
+//                        0,
+//                        0
+//                    )
 
                 }
 
@@ -1278,20 +1282,20 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
         if (todo.priority) {
             todoEditBottomSheetView.todoPriorityBtn.text = "우선순위 해제"
-            todoEditBottomSheetView.todoPriorityBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                R.drawable.todo_priority_fill_icon,
-                0,
-                0,
-                0
-            )
+//            todoEditBottomSheetView.todoPriorityBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(
+//                R.drawable.todo_priority_fill_icon,
+//                0,
+//                0,
+//                0
+//            )
         } else {
             todoEditBottomSheetView.todoPriorityBtn.text = "우선순위 등록"
-            todoEditBottomSheetView.todoPriorityBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(
-                R.drawable.todo_priority_icon,
-                0,
-                0,
-                0
-            )
+//            todoEditBottomSheetView.todoPriorityBtn.setCompoundDrawablesRelativeWithIntrinsicBounds(
+//                R.drawable.todo_priority_icon,
+//                0,
+//                0,
+//                0
+//            )
         }
 
         todoEditBottomSheetView.todoPriorityBtn.setOnClickListener {
@@ -1318,7 +1322,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             val dialogView = TodoDeleteDialogLayoutBinding.inflate(layoutInflater)
             val dialog =
-                AlertDialog.Builder(this, R.style.DialogTransparentTheme).setView(dialogView.root)
+                AlertDialog.Builder(this
+//                    , R.style.DialogTransparentTheme
+                ).setView(dialogView.root)
                     .create()
 
 
@@ -1331,8 +1337,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
             dialogView.todoDeleteBtn.setOnClickListener {
                 viewModel.deleteTodo(todo.id).invokeOnCompletion {
 
-                    binding.weekCalendarView.notifyCalendarChanged()
-                    binding.monthCalendarView.notifyCalendarChanged()
+//                    binding.weekCalendarView.notifyCalendarChanged()
+//                    binding.monthCalendarView.notifyCalendarChanged()
 
                     widgetUpdate(this)
 
@@ -1363,8 +1369,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                     }
 
 
-                    binding.weekCalendarView.notifyCalendarChanged()
-                    binding.monthCalendarView.notifyCalendarChanged()
+//                    binding.weekCalendarView.notifyCalendarChanged()
+//                    binding.monthCalendarView.notifyCalendarChanged()
                     widgetUpdate(this)
 
                     if (it is CancellationException)
@@ -1430,7 +1436,10 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
 
         val dialogView = PlanDeleteDialogLayoutBinding.inflate(layoutInflater)
-        val dialog = AlertDialog.Builder(this, R.style.DialogTransparentTheme).setView(dialogView.root)
+        val dialog = AlertDialog.Builder(this
+//            , R.style.DialogTransparentTheme
+        )
+            .setView(dialogView.root)
                 .create()
 
         dialogView.planDeleteCancelBtn.setOnClickListener {
@@ -1460,7 +1469,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
     private fun showCategoryAddDialog() {
 
-        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetTheme)
+        val bottomSheetDialog = BottomSheetDialog(this
+//            , R.style.BottomSheetTheme
+        )
         val categoryAddDialogView = CategoryAddBottomSheetLayoutBinding.inflate(layoutInflater)
 
         var categoryIconConstraintExpanded = false
@@ -1714,7 +1725,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
     private fun todoRepeatSettingDialog(todo: Todo) {
 
-        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetTheme)
+        val bottomSheetDialog = BottomSheetDialog(this
+//            , R.style.BottomSheetTheme
+        )
         val todoRepeatDialogView =
             TodoItemRepeatSettingBottomSheetLayoutBinding.inflate(layoutInflater)
 
@@ -1859,11 +1872,11 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
         }
 
-        val daysOfWeek =
-            daysOfWeek(firstDayOfWeek = if (viewModel.firstDayOfWeekFlow.value == "Mon") DayOfWeek.MONDAY else DayOfWeek.SUNDAY)
-        var currentMonth = YearMonth.now()
-        val startMonth = currentMonth.minusMonths(100)
-        val endMonth = currentMonth.plusMonths(100)
+//        val daysOfWeek =
+//            daysOfWeek(firstDayOfWeek = if (viewModel.firstDayOfWeekFlow.value == "Mon") DayOfWeek.MONDAY else DayOfWeek.SUNDAY)
+//        var currentMonth = YearMonth.now()
+//        val startMonth = currentMonth.minusMonths(100)
+//        val endMonth = currentMonth.plusMonths(100)
 
         todoDailyRptStartDate = LocalDate.parse(todo.startDate)
 
@@ -1873,10 +1886,10 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
             .filterIsInstance<TextView>()
 //            .map { it as TextView }
             .forEachIndexed { index, textView ->
-                textView.text =
-                    daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.getDefault())
-
-                textView.setTextColor(ContextCompat.getColor(this,R.color.white))
+//                textView.text =
+//                    daysOfWeek[index].getDisplayName(TextStyle.SHORT, Locale.getDefault())
+//
+//                textView.setTextColor(ContextCompat.getColor(this,R.color.white))
             }
 
         todoRepeatDialogView.repeatDailySettingLayout.todoRptCalendarTitleContainer.root.getChildAt(
@@ -1892,30 +1905,30 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             todoRepeatDialogView.repeatDailySettingLayout.startDateChangeCalendarConstraint.visibility =
                 View.VISIBLE
-            initTodoDailyRepeatCalendar(
-                todoRepeatDialogView.repeatDailySettingLayout.startDateChangeCalendar,
-                startMonth,
-                endMonth,
-                currentMonth,
-                daysOfWeek,
-                todoRepeatDialogView.repeatDailySettingLayout.calendarMonthText
-            )
+//            initTodoDailyRepeatCalendar(
+//                todoRepeatDialogView.repeatDailySettingLayout.startDateChangeCalendar,
+//                startMonth,
+//                endMonth,
+//                currentMonth,
+//                daysOfWeek,
+//                todoRepeatDialogView.repeatDailySettingLayout.calendarMonthText
+//            )
 
         }
 
         todoRepeatDialogView.repeatDailySettingLayout.calendarPreviousBtn.setOnClickListener {
-            currentMonth = currentMonth.minusMonths(1)
-            todoRepeatDialogView.repeatDailySettingLayout.startDateChangeCalendar.scrollToMonth(
-                currentMonth
-            )
+//            currentMonth = currentMonth.minusMonths(1)
+//            todoRepeatDialogView.repeatDailySettingLayout.startDateChangeCalendar.scrollToMonth(
+//                currentMonth
+//            )
         }
 
         todoRepeatDialogView.repeatDailySettingLayout.calendarNextBtn.setOnClickListener {
-            currentMonth = currentMonth.plusMonths(1)
+//            currentMonth = currentMonth.plusMonths(1)
 
-            todoRepeatDialogView.repeatDailySettingLayout.startDateChangeCalendar.scrollToMonth(
-                currentMonth
-            )
+//            todoRepeatDialogView.repeatDailySettingLayout.startDateChangeCalendar.scrollToMonth(
+//                currentMonth
+//            )
         }
 
         todoRepeatDialogView.todoRepeatWeeklyBtn.setOnClickListener {
@@ -2011,17 +2024,17 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
                 // 선택 상태 토글
                 if (tv.isSelected) {
                     tv.isSelected = false
-                    tv.background = ContextCompat.getDrawable(
-                        this,
-                        R.drawable.todo_rpt_day_change_calendar_item_default_bg
-                    )
+//                    tv.background = ContextCompat.getDrawable(
+//                        this,
+//                        R.drawable.todo_rpt_day_change_calendar_item_default_bg
+//                    )
                     selectedDays.remove(tv)
                 } else {
                     tv.isSelected = true
-                    tv.background = ContextCompat.getDrawable(
-                        this,
-                        R.drawable.todo_rpt_day_change_calendar_item_pressed_bg
-                    )
+//                    tv.background = ContextCompat.getDrawable(
+//                        this,
+//                        R.drawable.todo_rpt_day_change_calendar_item_pressed_bg
+//                    )
                     if(!selectedDays.contains(tv)) selectedDays.add(tv)
                 }
 
@@ -2087,11 +2100,11 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         todoRepeatDialogView.repeatMonthlySettingLayout.repeatMonthDayRecyclerView.layoutManager =
             layoutManager
 
-        val monthList = monthToDateList(LocalDate.now().yearMonth, monthlyRptSelectedDates)
+//        val monthList = monthToDateList(LocalDate.now().yearMonth, monthlyRptSelectedDates)
+//
+//        monthList.add(TodoMonthlyRptDayClass("-1", false))
 
-        monthList.add(TodoMonthlyRptDayClass("-1", false))
-
-        adapter.submitList(monthList)
+//        adapter.submitList(monthList)
 
 
         todoRepeatDialogView.todoRepeatEndDateSwitch.setOnCheckedChangeListener(object :
@@ -2170,7 +2183,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
     private fun todoMemoDialog(todo: Todo) {
         val dialogView = TodoMemoDialogLayoutBinding.inflate(layoutInflater)
         val dialog = AlertDialog
-            .Builder(this, R.style.DialogTransparentTheme)
+            .Builder(this,
+//                R.style.DialogTransparentTheme
+            )
             .setView(dialogView.root)
             .create()
 
@@ -2249,7 +2264,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
     private fun todoCategoryChangeDialog(todo: Todo) {
 
-        val bottomSheetDialog = BottomSheetDialog(this, R.style.BottomSheetTheme)
+        val bottomSheetDialog = BottomSheetDialog(this
+//            , R.style.BottomSheetTheme
+        )
         val todoCategoryChangeDialogView =
             CategoryChangeBottomSheetLayoutBinding.inflate(layoutInflater)
 
@@ -2440,96 +2457,96 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         currentMonth: YearMonth,
         daysOfWeek: List<DayOfWeek>,
     ) {
-        class WeekDayViewContainer(view: View) : ViewContainer(view) {
-            lateinit var day: WeekDay
-            val textView = WeekCalendarItemLayoutBinding.bind(view).weekCalendarDayText
+//        class WeekDayViewContainer(view: View) : ViewContainer(view) {
+//            lateinit var day: WeekDay
+//            val textView = WeekCalendarItemLayoutBinding.bind(view).weekCalendarDayText
+//
+//            val calendoModeConstraint =
+//                WeekCalendarItemLayoutBinding.bind(view).calendarItemCalendoModeConstraint
+//            val calendoTodoPlanModeConstraint =
+//                WeekCalendarItemLayoutBinding.bind(view).calendarItemTodoPlanModeConstraint
+//            val calendoPlanModeConstraint =
+//                WeekCalendarItemLayoutBinding.bind(view).calendarItemPlanModeConstraint
+//
+//            val calendoTodoText = WeekCalendarItemLayoutBinding.bind(view).calendarCalendoTodoText
+//            val calendoPlanText = WeekCalendarItemLayoutBinding.bind(view).calendarCalendoPlanText
+//
+//            val todoFirstText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeFirstText
+//            val todoSecondText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeSecondText
+//            val todoThirdText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeThirdText
+//            val todoFourthText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeFourthText
+//
+//
+//            val planFirstImg = WeekCalendarItemLayoutBinding.bind(view).planModeFirstImg
+//            val planSecondImg = WeekCalendarItemLayoutBinding.bind(view).planModeSecondImg
+//            val planThirdImg = WeekCalendarItemLayoutBinding.bind(view).planModeThirdImg
+//            val planFourthImg = WeekCalendarItemLayoutBinding.bind(view).planModeFourthImg
+//
+//
+//            init {
+//                view.setOnClickListener {
+//                    if (day.position == WeekDayPosition.RangeDate) {
+//                        dateClicked(date = day.date)
+//                    }
+//                }
+//            }
+//        }
+//        binding.weekCalendarView.dayBinder = object : WeekDayBinder<WeekDayViewContainer> {
+//            override fun create(view: View): WeekDayViewContainer = WeekDayViewContainer(view)
+//            override fun bind(container: WeekDayViewContainer, data: WeekDay) {
+//                container.day = data
+//                bindDate(
+//                    data.date,
+//                    container.textView,
+//                    data.position == WeekDayPosition.RangeDate,
+//                    container.calendoTodoText,
+//                    container.calendoPlanText,
+//
+//                    container.calendoModeConstraint,
+//                    container.calendoTodoPlanModeConstraint,
+//                    container.calendoPlanModeConstraint,
+//
+//                    container.todoFirstText,
+//                    container.todoSecondText,
+//                    container.todoThirdText,
+//                    container.todoFourthText,
+//
+//                    container.planFirstImg,
+//                    container.planSecondImg,
+//                    container.planThirdImg,
+//                    container.planFourthImg
+//                )
+//            }
+//        }
+//        binding.weekCalendarView.weekScrollListener = {
+//
+//            val selectedDate = it.days[0].date
+//
+//            if (isProgrammaticWeekScroll) {
+//                isProgrammaticWeekScroll = false
+//                dateClicked(LocalDate.parse(viewModel.selectedDate.value))
+//            } else dateClicked(selectedDate)
+//
+//            val (startDate, endDate) = getWeekStartEnd(selectedDate.toString())
+//
+//
+//            if (viewModel.isWeekMode.value == true) viewModel.getGoal(startDate, endDate)
+//                .invokeOnCompletion {
+//                    Log.e("wScrollCurrentGoal",viewModel.currentGoal.value?.title.toString())
+//
+//                    setTodoInGoal()
+//
+//                }
+//        }
 
-            val calendoModeConstraint =
-                WeekCalendarItemLayoutBinding.bind(view).calendarItemCalendoModeConstraint
-            val calendoTodoPlanModeConstraint =
-                WeekCalendarItemLayoutBinding.bind(view).calendarItemTodoPlanModeConstraint
-            val calendoPlanModeConstraint =
-                WeekCalendarItemLayoutBinding.bind(view).calendarItemPlanModeConstraint
-
-            val calendoTodoText = WeekCalendarItemLayoutBinding.bind(view).calendarCalendoTodoText
-            val calendoPlanText = WeekCalendarItemLayoutBinding.bind(view).calendarCalendoPlanText
-
-            val todoFirstText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeFirstText
-            val todoSecondText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeSecondText
-            val todoThirdText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeThirdText
-            val todoFourthText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeFourthText
-
-
-            val planFirstImg = WeekCalendarItemLayoutBinding.bind(view).planModeFirstImg
-            val planSecondImg = WeekCalendarItemLayoutBinding.bind(view).planModeSecondImg
-            val planThirdImg = WeekCalendarItemLayoutBinding.bind(view).planModeThirdImg
-            val planFourthImg = WeekCalendarItemLayoutBinding.bind(view).planModeFourthImg
-
-
-            init {
-                view.setOnClickListener {
-                    if (day.position == WeekDayPosition.RangeDate) {
-                        dateClicked(date = day.date)
-                    }
-                }
-            }
-        }
-        binding.weekCalendarView.dayBinder = object : WeekDayBinder<WeekDayViewContainer> {
-            override fun create(view: View): WeekDayViewContainer = WeekDayViewContainer(view)
-            override fun bind(container: WeekDayViewContainer, data: WeekDay) {
-                container.day = data
-                bindDate(
-                    data.date,
-                    container.textView,
-                    data.position == WeekDayPosition.RangeDate,
-                    container.calendoTodoText,
-                    container.calendoPlanText,
-
-                    container.calendoModeConstraint,
-                    container.calendoTodoPlanModeConstraint,
-                    container.calendoPlanModeConstraint,
-
-                    container.todoFirstText,
-                    container.todoSecondText,
-                    container.todoThirdText,
-                    container.todoFourthText,
-
-                    container.planFirstImg,
-                    container.planSecondImg,
-                    container.planThirdImg,
-                    container.planFourthImg
-                )
-            }
-        }
-        binding.weekCalendarView.weekScrollListener = {
-
-            val selectedDate = it.days[0].date
-
-            if (isProgrammaticWeekScroll) {
-                isProgrammaticWeekScroll = false
-                dateClicked(LocalDate.parse(viewModel.selectedDate.value))
-            } else dateClicked(selectedDate)
-
-            val (startDate, endDate) = getWeekStartEnd(selectedDate.toString())
-
-
-            if (viewModel.isWeekMode.value == true) viewModel.getGoal(startDate, endDate)
-                .invokeOnCompletion {
-                    Log.e("wScrollCurrentGoal",viewModel.currentGoal.value?.title.toString())
-
-                    setTodoInGoal()
-
-                }
-        }
-
-        binding.weekCalendarView.setup(
-            startMonth.atStartOfMonth(),
-            endMonth.atEndOfMonth(),
-            daysOfWeek.first(),
-        )
+//        binding.weekCalendarView.setup(
+//            startMonth.atStartOfMonth(),
+//            endMonth.atEndOfMonth(),
+//            daysOfWeek.first(),
+//        )
         isProgrammaticWeekScroll = true
 
-        binding.weekCalendarView.scrollToWeek(LocalDate.now())
+//        binding.weekCalendarView.scrollToWeek(LocalDate.now())
     }
 
     private fun setupMonthCalendar(
@@ -2538,99 +2555,99 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         currentMonth: YearMonth,
         daysOfWeek: List<DayOfWeek>,
     ) {
-        class DayViewContainer(view: View) : ViewContainer(view) {
-            lateinit var day: CalendarDay
-            val textView = WeekCalendarItemLayoutBinding.bind(view).weekCalendarDayText
+//        class DayViewContainer(view: View) : ViewContainer(view) {
+//            lateinit var day: CalendarDay
+//            val textView = WeekCalendarItemLayoutBinding.bind(view).weekCalendarDayText
+//
+//            val calendoModeConstraint =
+//                WeekCalendarItemLayoutBinding.bind(view).calendarItemCalendoModeConstraint
+//            val calendoTodoPlanModeConstraint =
+//                WeekCalendarItemLayoutBinding.bind(view).calendarItemTodoPlanModeConstraint
+//
+//            val calendoTodoText = WeekCalendarItemLayoutBinding.bind(view).calendarCalendoTodoText
+//            val calendoPlanText = WeekCalendarItemLayoutBinding.bind(view).calendarCalendoPlanText
+//
+//            val todoFirstText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeFirstText
+//            val todoSecondText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeSecondText
+//            val todoThirdText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeThirdText
+//            val todoFourthText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeFourthText
+//
+//            val calendoPlanModeConstraint =
+//                WeekCalendarItemLayoutBinding.bind(view).calendarItemPlanModeConstraint
+//
+//            val planFirstImg = WeekCalendarItemLayoutBinding.bind(view).planModeFirstImg
+//            val planSecondImg = WeekCalendarItemLayoutBinding.bind(view).planModeSecondImg
+//            val planThirdImg = WeekCalendarItemLayoutBinding.bind(view).planModeThirdImg
+//            val planFourthImg = WeekCalendarItemLayoutBinding.bind(view).planModeFourthImg
+//
+//            init {
+//                view.setOnClickListener {
+//                    if (day.position == DayPosition.MonthDate) {
+//                        dateClicked(date = day.date)
+//                    }
+//                }
+//            }
+//        }
+//        binding.monthCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
+//            override fun create(view: View) = DayViewContainer(view)
+//            override fun bind(container: DayViewContainer, data: CalendarDay) {
+//                container.day = data
+//
+//                bindDate(
+//                    data.date,
+//                    container.textView,
+//                    data.position == DayPosition.MonthDate,
+//                    container.calendoTodoText,
+//                    container.calendoPlanText,
+//
+//                    container.calendoModeConstraint,
+//                    container.calendoTodoPlanModeConstraint,
+//                    container.calendoPlanModeConstraint,
+//
+//                    container.todoFirstText,
+//                    container.todoSecondText,
+//                    container.todoThirdText,
+//                    container.todoFourthText,
+//
+//
+//                    container.planFirstImg,
+//                    container.planSecondImg,
+//                    container.planThirdImg,
+//                    container.planFourthImg
+//                )
+//            }
+//        }
 
-            val calendoModeConstraint =
-                WeekCalendarItemLayoutBinding.bind(view).calendarItemCalendoModeConstraint
-            val calendoTodoPlanModeConstraint =
-                WeekCalendarItemLayoutBinding.bind(view).calendarItemTodoPlanModeConstraint
-
-            val calendoTodoText = WeekCalendarItemLayoutBinding.bind(view).calendarCalendoTodoText
-            val calendoPlanText = WeekCalendarItemLayoutBinding.bind(view).calendarCalendoPlanText
-
-            val todoFirstText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeFirstText
-            val todoSecondText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeSecondText
-            val todoThirdText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeThirdText
-            val todoFourthText = WeekCalendarItemLayoutBinding.bind(view).todoPlanModeFourthText
-
-            val calendoPlanModeConstraint =
-                WeekCalendarItemLayoutBinding.bind(view).calendarItemPlanModeConstraint
-
-            val planFirstImg = WeekCalendarItemLayoutBinding.bind(view).planModeFirstImg
-            val planSecondImg = WeekCalendarItemLayoutBinding.bind(view).planModeSecondImg
-            val planThirdImg = WeekCalendarItemLayoutBinding.bind(view).planModeThirdImg
-            val planFourthImg = WeekCalendarItemLayoutBinding.bind(view).planModeFourthImg
-
-            init {
-                view.setOnClickListener {
-                    if (day.position == DayPosition.MonthDate) {
-                        dateClicked(date = day.date)
-                    }
-                }
-            }
-        }
-        binding.monthCalendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
-            override fun create(view: View) = DayViewContainer(view)
-            override fun bind(container: DayViewContainer, data: CalendarDay) {
-                container.day = data
-
-                bindDate(
-                    data.date,
-                    container.textView,
-                    data.position == DayPosition.MonthDate,
-                    container.calendoTodoText,
-                    container.calendoPlanText,
-
-                    container.calendoModeConstraint,
-                    container.calendoTodoPlanModeConstraint,
-                    container.calendoPlanModeConstraint,
-
-                    container.todoFirstText,
-                    container.todoSecondText,
-                    container.todoThirdText,
-                    container.todoFourthText,
-
-
-                    container.planFirstImg,
-                    container.planSecondImg,
-                    container.planThirdImg,
-                    container.planFourthImg
-                )
-            }
-        }
-
-        binding.monthCalendarView.monthScrollListener = {
-            viewModel.currentMonth.value = it.yearMonth
-            val selectedDate = it.yearMonth.atDay(1)
-
-            Log.e("monthScroll", isProgrammaticMonthScroll.toString())
-            Log.e("monthDate", viewModel.selectedDate.value.toString())
-
-            if (isProgrammaticMonthScroll) {
-                isProgrammaticMonthScroll = false
-                dateClicked(LocalDate.parse(viewModel.selectedDate.value))
-            } else dateClicked(selectedDate)
-
-//            viewModel.selectedDate.value = selectedDate.toString()
-//            binding.monthCalendarView.notifyCalendarChanged()
-
-            val (startDate, endDate) = getMonthStartAndEnd(selectedDate.toString())
-
-            if (viewModel.isWeekMode.value == false) viewModel.getGoal(startDate, endDate)
-                .invokeOnCompletion {
-
-                    Log.e("mScrollCurrentGoal",viewModel.currentGoal.value?.title.toString())
-
-                    setTodoInGoal()
-                }
-
-//            viewModel.currentMonthString.value = monthToString(it.yearMonth)
-        }
-        binding.monthCalendarView.setup(startMonth, endMonth, daysOfWeek.first())
-        isProgrammaticMonthScroll = true
-        binding.monthCalendarView.scrollToMonth(currentMonth)
+//        binding.monthCalendarView.monthScrollListener = {
+//            viewModel.currentMonth.value = it.yearMonth
+//            val selectedDate = it.yearMonth.atDay(1)
+//
+//            Log.e("monthScroll", isProgrammaticMonthScroll.toString())
+//            Log.e("monthDate", viewModel.selectedDate.value.toString())
+//
+//            if (isProgrammaticMonthScroll) {
+//                isProgrammaticMonthScroll = false
+//                dateClicked(LocalDate.parse(viewModel.selectedDate.value))
+//            } else dateClicked(selectedDate)
+//
+////            viewModel.selectedDate.value = selectedDate.toString()
+////            binding.monthCalendarView.notifyCalendarChanged()
+//
+//            val (startDate, endDate) = getMonthStartAndEnd(selectedDate.toString())
+//
+//            if (viewModel.isWeekMode.value == false) viewModel.getGoal(startDate, endDate)
+//                .invokeOnCompletion {
+//
+//                    Log.e("mScrollCurrentGoal",viewModel.currentGoal.value?.title.toString())
+//
+//                    setTodoInGoal()
+//                }
+//
+////            viewModel.currentMonthString.value = monthToString(it.yearMonth)
+//        }
+//        binding.monthCalendarView.setup(startMonth, endMonth, daysOfWeek.first())
+//        isProgrammaticMonthScroll = true
+//        binding.monthCalendarView.scrollToMonth(currentMonth)
     }
 
     private fun bindDate(
@@ -2660,9 +2677,9 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
         when {
             isSelectable == false -> {
                 textView.apply {
-                    setTextAppearance(
-                        R.style.calendar_out_date_text_style
-                    )
+//                    setTextAppearance(
+//                        R.style.calendar_out_date_text_style
+//                    )
                     background = null
                 }
             }
@@ -2670,22 +2687,22 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
             viewModel.selectedDate.value.toString() == date.toString() -> {
                 textView.apply {
 
-                    setTextAppearance(
-                        R.style.calendar_selected_text_style
-                    )
-                    background = ContextCompat.getDrawable(
-                        this@TodoListActivity,
-                        R.drawable.calendar_selected_date_bg
-                    )
+//                    setTextAppearance(
+//                        R.style.calendar_selected_text_style
+//                    )
+//                    background = ContextCompat.getDrawable(
+//                        this@TodoListActivity,
+//                        R.drawable.calendar_selected_date_bg
+//                    )
 
                 }
             }
 
             date == LocalDate.now() -> {
                 textView.apply {
-                    setTextAppearance(
-                        R.style.calendar_today_text_style
-                    )
+//                    setTextAppearance(
+//                        R.style.calendar_today_text_style
+//                    )
                     background = null
                 }
             }
@@ -2693,7 +2710,7 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
             else -> {
 
                 textView.apply {
-                    setTextAppearance(R.style.calendar_default_text_style)
+//                    setTextAppearance(R.style.calendar_default_text_style)
                     background = null
                 }
             }
@@ -3091,12 +3108,12 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
         val currentSelection = LocalDate.parse(viewModel.selectedDate.value.toString())
         viewModel.selectedDate.value = date.toString()
-        viewModel.currentMonth.value = date.yearMonth
+//        viewModel.currentMonth.value = date.yearMonth
         viewModel.currentMonthString.value =
             localDateToString(LocalDate.parse(viewModel.selectedDate.value))
 
-        binding.monthCalendarView.notifyCalendarChanged()
-        binding.weekCalendarView.notifyDateChanged(date)
+//        binding.monthCalendarView.notifyCalendarChanged()
+//        binding.weekCalendarView.notifyDateChanged(date)
 
         // 현재 필터링된 카테고리는 유지해야 됨
 
@@ -3124,8 +3141,8 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
         if (currentSelection != null) {
 
-            binding.monthCalendarView.notifyDateChanged(currentSelection)
-            binding.weekCalendarView.notifyDateChanged(currentSelection)
+//            binding.monthCalendarView.notifyDateChanged(currentSelection)
+//            binding.weekCalendarView.notifyDateChanged(currentSelection)
         }
 
         binding.titlesContainer.root.children
@@ -3148,16 +3165,16 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
     // 월간, 주간 변환될 때 currentGoal 업데이트 해야됨
     private fun toggleCalendarMode(toWeekMode: Boolean) {
-        if (toWeekMode) {
-
-            isProgrammaticWeekScroll = true
-            binding.weekCalendarView.scrollToWeek(LocalDate.parse(viewModel.selectedDate.value!!))
-
-        } else {
-
-            isProgrammaticMonthScroll = true
-            binding.monthCalendarView.scrollToMonth(LocalDate.parse(viewModel.selectedDate.value!!).yearMonth)
-        }
+//        if (toWeekMode) {
+//
+//            isProgrammaticWeekScroll = true
+//            binding.weekCalendarView.scrollToWeek(LocalDate.parse(viewModel.selectedDate.value!!))
+//
+//        } else {
+//
+//            isProgrammaticMonthScroll = true
+//            binding.monthCalendarView.scrollToMonth(LocalDate.parse(viewModel.selectedDate.value!!).yearMonth)
+//        }
 
 
         if (toWeekMode) {
@@ -3171,65 +3188,65 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 
             }
         } else {
-            val selectedDate = viewModel.currentMonth.value.atDay(1)
+//            val selectedDate = viewModel.currentMonth.value.atDay(1)
 
-            val (startDate, endDate) = getMonthStartAndEnd(selectedDate.toString())
-            viewModel.getGoal(startDate, endDate).invokeOnCompletion { throwable ->
+//            val (startDate, endDate) = getMonthStartAndEnd(selectedDate.toString())
+//            viewModel.getGoal(startDate, endDate).invokeOnCompletion { throwable ->
+//
+//                when (throwable) {
+//                    is CancellationException -> {
+//
+//                        Log.e("Cancel", "cancel")
+//                    }
+//
+//                    else -> {
+//
+//                        Log.e("tcmCurrentGoal2",viewModel.currentGoal.value?.title.toString())
+//
+//                        setTodoInGoal()
+//                    }
+//                }
 
-                when (throwable) {
-                    is CancellationException -> {
 
-                        Log.e("Cancel", "cancel")
-                    }
-
-                    else -> {
-
-                        Log.e("tcmCurrentGoal2",viewModel.currentGoal.value?.title.toString())
-
-                        setTodoInGoal()
-                    }
-                }
-
-
-            }
+//            }
         }
 
-        val weekHeight = binding.weekCalendarView.height
-        val visibleMonthHeight =
-            weekHeight * binding.monthCalendarView.findFirstVisibleMonth()?.weekDays.orEmpty()
-                .count()
+//        val weekHeight = binding.weekCalendarView.height
+//        val visibleMonthHeight =
+//            weekHeight * binding.monthCalendarView.findFirstVisibleMonth()?.weekDays.orEmpty()
+//                .count()
 
-        val oldHeight = if (toWeekMode) visibleMonthHeight else weekHeight
-        val newHeight = if (toWeekMode) weekHeight else visibleMonthHeight
+//        val oldHeight = if (toWeekMode) visibleMonthHeight else weekHeight
+//        val newHeight = if (toWeekMode) weekHeight else visibleMonthHeight
 
-        val animator = ValueAnimator.ofInt(oldHeight, newHeight)
-        animator.addUpdateListener { anim ->
-            binding.monthCalendarView.updateLayoutParams {
-                height = anim.animatedValue as Int
-            }
+//        val animator = ValueAnimator.ofInt(oldHeight, newHeight)
+//        animator.addUpdateListener { anim ->
+//            binding.monthCalendarView.updateLayoutParams {
+//                height = anim.animatedValue as Int
+//            }
+//
+//            binding.monthCalendarView.children.forEach { child ->
+//                child.requestLayout()
+//            }
+//
+//            binding.weekCalendarView.updateLayoutParams {
+//                height = anim.animatedValue as Int
+//            }
+//
+//            binding.weekCalendarView.children.forEach { child ->
+//                child.requestLayout()
+//            }
+//        }
 
-            binding.monthCalendarView.children.forEach { child ->
-                child.requestLayout()
-            }
-
-            binding.weekCalendarView.updateLayoutParams {
-                height = anim.animatedValue as Int
-            }
-
-            binding.weekCalendarView.children.forEach { child ->
-                child.requestLayout()
-            }
-        }
-
-        animator.doOnStart {
-            if (!toWeekMode) {
-                binding.weekCalendarView.visibility = View.GONE
-                binding.monthCalendarView.visibility = View.VISIBLE
+//        animator.doOnStart {
+//            if (!toWeekMode) {
+//                binding.weekCalendarView.visibility = View.GONE
+//                binding.monthCalendarView.visibility = View.VISIBLE
 
 //                binding.weekCalendarView.isInvisible = true
 //                binding.monthCalendarView.isVisible = true
 
-                viewModel.isWeekMode.value = false
+//                viewModel.isWeekMode.value = false
 
 //                val selectedDate = binding.monthCalendarView.findFirstVisibleMonth()?.yearMonth?.atDay(1)
 //                val (startDate, endDate) = getWeekStartEnd(selectedDate.toString())
@@ -3237,143 +3254,144 @@ class TodoListActivity : AppCompatActivity(), CategoryClickListener, TodoClickLi
 //
 //                }
 
-            } else {
-                binding.weekCalendarView.visibility = View.VISIBLE
-                binding.weekCalendarView.isVisible = true
-                binding.weekCalendarView.updateLayoutParams { height = weekHeight }
-            }
-        }
-        animator.doOnEnd {
-            if (toWeekMode) {
-                binding.weekCalendarView.visibility = View.VISIBLE
-                binding.monthCalendarView.visibility = View.GONE
+//            } else {
+//                binding.weekCalendarView.visibility = View.VISIBLE
 //                binding.weekCalendarView.isVisible = true
-//                binding.monthCalendarView.isInvisible = true
-
-                viewModel.isWeekMode.value = true
-                binding.weekCalendarView.updateLayoutParams { height = weekHeight }
-
-            } else {
-                binding.monthCalendarView.visibility = View.VISIBLE
-                binding.monthCalendarView.updateLayoutParams {
-                    height = ViewGroup.LayoutParams.WRAP_CONTENT
-                }
-            }
-//            updateTitle()
+//                binding.weekCalendarView.updateLayoutParams { height = weekHeight }
+//            }
         }
+//        animator.doOnEnd {
+//            if (toWeekMode) {
+//                binding.weekCalendarView.visibility = View.VISIBLE
+//                binding.monthCalendarView.visibility = View.GONE
+////                binding.weekCalendarView.isVisible = true
+////                binding.monthCalendarView.isInvisible = true
+//
+//                viewModel.isWeekMode.value = true
+//                binding.weekCalendarView.updateLayoutParams { height = weekHeight }
+//
+//            } else {
+//                binding.monthCalendarView.visibility = View.VISIBLE
+//                binding.monthCalendarView.updateLayoutParams {
+//                    height = ViewGroup.LayoutParams.WRAP_CONTENT
+//                }
+//            }
+
+//            updateTitle()
+//        }
 
 
-        animator.duration = 250
-        animator.start()
-
-        binding.appBarLayout.setExpanded(true, true)
+//        animator.duration = 250
+//        animator.start()
+//
+//        binding.appBarLayout.setExpanded(true, true)
 
     }
 
     private fun initTodoDailyRepeatCalendar(
-        calendarView: CalendarView,
+//        calendarView: CalendarView,
         startMonth: YearMonth,
         endMonth: YearMonth,
         currentMonth: YearMonth,
         daysOfWeek: List<DayOfWeek>,
         currentMonthTextView: TextView
     ) {
-        class DayViewContainer(view: View) : ViewContainer(view) {
-            lateinit var day: CalendarDay
-            val textView = TodoRptDayChangeCalendarItemLayoutBinding.bind(view).weekCalendarDayText
+//        class DayViewContainer(view: View) : ViewContainer(view) {
+//            lateinit var day: CalendarDay
+//            val textView = TodoRptDayChangeCalendarItemLayoutBinding.bind(view).weekCalendarDayText
+//
+//            init {
+//                view.setOnClickListener {
+//                    if (day.position == DayPosition.MonthDate) {
+//                        todoDailyRepeatDateClicked(date = day.date)
+//                        calendarView.notifyCalendarChanged()
+////                        calendarView.notifyMonthChanged(day.date.yearMonth)
+////                        calendarView.notifyDateChanged(day.date)
+//                    }
+//                }
+//            }
+//        }
+//        calendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
+//            override fun create(view: View) = DayViewContainer(view)
+//            override fun bind(container: DayViewContainer, data: CalendarDay) {
+//                container.day = data
+//                if (data.position == DayPosition.MonthDate) {
+//                    container.textView.visibility = View.VISIBLE
+//                    container.textView.text = data.date.dayOfMonth.toString()
+//                    when {
+//                        todoDailyRptStartDate == data.date -> {
+//                            container.textView.setTextAppearance(R.style.todo_daily_repeat_calendar_selected_text_style)
+//                            container.textView.background = ContextCompat.getDrawable(
+//                                this@TodoListActivity,
+//                                R.drawable.todo_rpt_day_change_calendar_item_pressed_bg
+//                            )
+//                        }
+//
+//                        data.date == LocalDate.now() -> {
+//                            container.textView.setTextAppearance(R.style.todo_daily_repeat_calendar_default_text_style)
+//                            container.textView.background = ContextCompat.getDrawable(
+//                                this@TodoListActivity,
+//                                R.drawable.todo_rpt_day_change_calendar_item_today_bg
+//                            )
+//                        }
+//
+//                        else -> {
+//                            container.textView.setTextAppearance(R.style.todo_daily_repeat_calendar_default_text_style)
+//                            container.textView.background = ContextCompat.getDrawable(
+//                                this@TodoListActivity,
+//                                R.drawable.todo_rpt_day_change_calendar_item_default_bg
+//                            )
+//                        }
+//                    }
+//
+//                    // bindDate(data.date, container.textView, data.position == DayPosition.MonthDate,selectedDates)
+//                } else container.textView.visibility = View.INVISIBLE
+//            }
+//        }
 
-            init {
-                view.setOnClickListener {
-                    if (day.position == DayPosition.MonthDate) {
-                        todoDailyRepeatDateClicked(date = day.date)
-                        calendarView.notifyCalendarChanged()
-//                        calendarView.notifyMonthChanged(day.date.yearMonth)
-//                        calendarView.notifyDateChanged(day.date)
-                    }
-                }
-            }
-        }
-        calendarView.dayBinder = object : MonthDayBinder<DayViewContainer> {
-            override fun create(view: View) = DayViewContainer(view)
-            override fun bind(container: DayViewContainer, data: CalendarDay) {
-                container.day = data
-                if (data.position == DayPosition.MonthDate) {
-                    container.textView.visibility = View.VISIBLE
-                    container.textView.text = data.date.dayOfMonth.toString()
-                    when {
-                        todoDailyRptStartDate == data.date -> {
-                            container.textView.setTextAppearance(R.style.todo_daily_repeat_calendar_selected_text_style)
-                            container.textView.background = ContextCompat.getDrawable(
-                                this@TodoListActivity,
-                                R.drawable.todo_rpt_day_change_calendar_item_pressed_bg
-                            )
-                        }
-
-                        data.date == LocalDate.now() -> {
-                            container.textView.setTextAppearance(R.style.todo_daily_repeat_calendar_default_text_style)
-                            container.textView.background = ContextCompat.getDrawable(
-                                this@TodoListActivity,
-                                R.drawable.todo_rpt_day_change_calendar_item_today_bg
-                            )
-                        }
-
-                        else -> {
-                            container.textView.setTextAppearance(R.style.todo_daily_repeat_calendar_default_text_style)
-                            container.textView.background = ContextCompat.getDrawable(
-                                this@TodoListActivity,
-                                R.drawable.todo_rpt_day_change_calendar_item_default_bg
-                            )
-                        }
-                    }
-
-                    // bindDate(data.date, container.textView, data.position == DayPosition.MonthDate,selectedDates)
-                } else container.textView.visibility = View.INVISIBLE
-            }
-        }
-
-        calendarView.monthScrollListener = {
-            it
-            currentMonthTextView.text = monthToString(it.yearMonth)
-        }
-
-        calendarView.setup(startMonth, endMonth, daysOfWeek.first())
-        calendarView.scrollToMonth(currentMonth)
+//        calendarView.monthScrollListener = {
+//            it
+//            currentMonthTextView.text = monthToString(it.yearMonth)
+//        }
+//
+//        calendarView.setup(startMonth, endMonth, daysOfWeek.first())
+//        calendarView.scrollToMonth(currentMonth)
     }
 
     private fun addTodoInGoal() {
-        viewModel.currentGoal.value?.let {
-
-            Log.e("currentGoal",it.goalId)
-            Log.e("currentGoal",it.title)
-
-            val startDate = it.startDate
-            val endDate = it.endDate
-            val goalId = it.goalId
-
-            viewModel.addTodoInGoal(startDate, endDate, goalId)
-
-        }
+//        viewModel.currentGoal.value?.let {
+//
+//            Log.e("currentGoal",it.goalId)
+//            Log.e("currentGoal",it.title)
+//
+//            val startDate = it.startDate
+//            val endDate = it.endDate
+//            val goalId = it.goalId
+//
+//            viewModel.addTodoInGoal(startDate, endDate, goalId)
+//
+//        }
     }
 
     fun requestNotificationPermission() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            when {
-                ContextCompat.checkSelfPermission(
-                    this,
-                    Manifest.permission.POST_NOTIFICATIONS
-                ) == PackageManager.PERMISSION_GRANTED -> {
-
-                }
-                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
-                    // 사용자에게 권한이 필요한 이유를 설명하는 UI를 보여줘야 하는 경우
-                    // 예를 들어, 다이얼로그를 통해 설명하고 "확인" 버튼을 누르면 권한 요청
-                    println("알림을 받으려면 권한이 필요합니다. 설정에서 권한을 허용해 주세요.")
-                    // 여기서 사용자에게 설명하는 다이얼로그 등을 표시하고
-                    // 다이얼로그의 확인 버튼을 누르면 아래의 requestPermissionLauncher.launch() 호출
-                }
-                else -> notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
-
-            }
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+//            when {
+//                ContextCompat.checkSelfPermission(
+//                    this,
+//                    Manifest.permission.POST_NOTIFICATIONS
+//                ) == PackageManager.PERMISSION_GRANTED -> {
+//
+//                }
+//                shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS) -> {
+//                    // 사용자에게 권한이 필요한 이유를 설명하는 UI를 보여줘야 하는 경우
+//                    // 예를 들어, 다이얼로그를 통해 설명하고 "확인" 버튼을 누르면 권한 요청
+//                    println("알림을 받으려면 권한이 필요합니다. 설정에서 권한을 허용해 주세요.")
+//                    // 여기서 사용자에게 설명하는 다이얼로그 등을 표시하고
+//                    // 다이얼로그의 확인 버튼을 누르면 아래의 requestPermissionLauncher.launch() 호출
+//                }
+//                else -> notificationPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+//
+//            }
+//        }
     }
-}
+//}
